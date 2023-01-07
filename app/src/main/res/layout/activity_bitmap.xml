@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Bitmap">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imagebitmap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/zoomin"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_baseline_zoom_in_24"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/zoomout"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_baseline_zoom_out_24"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/clear"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:hint="C"
+                android:textColorHint="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/load"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:hint="I"
+                android:textColorHint="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/read"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:hint="R"
+                android:textColorHint="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:weightSum="4"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/X"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="X"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"/>
+
+            <EditText
+                android:id="@+id/Y"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:hint="Y"
+                android:textColorHint="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add"
+                android:hint="Add Point"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/draw"
+                android:hint="Draw Point"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="@color/black"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
