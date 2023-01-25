@@ -19,5 +19,11 @@
         android:icon="@drawable/ic_baseline_satellite_alt_24"
         />
 
+    <item
+        android:id="@+id/csvreaderwriter"
+        android:title="CSV Reader Writer"
+        android:icon="@drawable/ic_baseline_content_paste_24"
+        />
+
 
 </menu>

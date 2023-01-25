@@ -1,9 +1,6 @@
-package com.example.new1.CSV;
+package com.example.simplebitmap;
 
 import static android.os.Build.VERSION.SDK_INT;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -18,7 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.new1.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,7 +37,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class CSVActivity extends AppCompatActivity {
 
@@ -62,12 +60,7 @@ public class CSVActivity extends AppCompatActivity {
     ArrayList<ArrayList<String>> shape_list = new ArrayList<ArrayList<String>>();
     ArrayList<Double> arrayListeasting = new ArrayList<Double>();
     ArrayList<Double> arrayListnorthing = new ArrayList<Double>();
-    ArrayList<csvmodel> csvmodelArrayList = new ArrayList<csvmodel>();
-    //    ArrayList<csvmodel> csvmodelArrayList1 = new ArrayList<csvmodel>();
-//    HashMap<String, ArrayList<csvmodel>> point_data = new HashMap<String, ArrayList<csvmodel>>();
     LinkedHashMap<String, List<Double>> point_data = new LinkedHashMap<String, List<Double>>();
-    //    HashMap<String, ArrayList<csvmodel>> shape_data = new HashMap<String, ArrayList<csvmodel>>();
-    HashMap<String, HashMap<String, HashMap<String, ArrayList<csvmodel>>>> shape_data = new HashMap<String, HashMap<String, HashMap<String, ArrayList<csvmodel>>>>();
 
     Double minX;
     Double maxX;
@@ -76,15 +69,13 @@ public class CSVActivity extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////
     HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>> main = new HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>>();
 
-    //    csvmodel n= new csvmodel(String point_name, String easting, String northing, String elevation);
-
     long time1;
     long time2;
     long time3;
     long time4;
     long time5;
     long time6;
-    long time9;
+
 
     long time7;
     long time8;
@@ -336,7 +327,7 @@ public class CSVActivity extends AppCompatActivity {
         }
 
     }
-
+////////////////////////////////////////////////////////////////
     public void Step1() {
         Log.d(TAG, "point_list: "+point_list.size()+"======="+point_list.get(0));
        // ArrayList<Double> temp_point_coord = new ArrayList<>();
@@ -1064,5 +1055,9 @@ public class CSVActivity extends AppCompatActivity {
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_STORAGE);
         }
+
+//        int permission1 = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        int permission2 = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+//        return permission1 == PackageManager.PERMISSION_GRANTED &&  permission2 == PackageManager.PERMISSION_GRANTED;
     }
 }

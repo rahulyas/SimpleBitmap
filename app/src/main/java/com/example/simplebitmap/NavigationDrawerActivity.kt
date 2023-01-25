@@ -1,6 +1,10 @@
 package com.example.simplebitmap
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Build.VERSION
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,11 +18,13 @@ class NavigationDrawerActivity : AppCompatActivity() {
     lateinit var drawerLayout: DrawerLayout
     lateinit var toogle : ActionBarDrawerToggle
     lateinit var navView : NavigationView
+    private val PERMISSION_REQUEST_STORAGE = 1000
+    private val WRITE_EXTERNAL_STORAGE_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation_drawer)
-
+        requestpermission()
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
 
@@ -48,6 +54,10 @@ class NavigationDrawerActivity : AppCompatActivity() {
                     val intent = Intent(this,SatelliteMapping::class.java)
                     startActivity(intent)
                 }
+                R.id.csvreaderwriter -> {
+                    val intent = Intent(this,CSVActivity::class.java)
+                    startActivity(intent)
+                }
 
             }
             true
@@ -70,5 +80,27 @@ class NavigationDrawerActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    /// Runtime RequestPermission
+    fun requestpermission() {
+        //request permission for Read
+        if (VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                PERMISSION_REQUEST_STORAGE
+            )
+        }
+        //request permission for Write
+        if (VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                PERMISSION_REQUEST_STORAGE
+            )
+        }
     }
 }

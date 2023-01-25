@@ -1,0 +1,3 @@
+com.ortiz.touchview
+attr zoom_enabled
+styleable TouchImageView zoom_enabled

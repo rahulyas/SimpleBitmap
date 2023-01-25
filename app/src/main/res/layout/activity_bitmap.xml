@@ -11,30 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+<!--        <ImageView-->
+<!--            android:id="@+id/imagebitmap"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            />-->
+        <com.ortiz.touchview.TouchImageView
             android:id="@+id/imagebitmap"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:layout_alignParentRight="true"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/zoomin"
-                android:layout_width="50dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/ic_baseline_zoom_in_24"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/zoomout"
-                android:layout_width="50dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/ic_baseline_zoom_out_24"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/clear"
@@ -53,12 +44,13 @@
                 android:textColorHint="@color/black"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/read"
+                android:id="@+id/reset"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:hint="R"
                 android:textColorHint="@color/black"/>
+
 
         </LinearLayout>
 

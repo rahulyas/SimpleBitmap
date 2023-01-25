@@ -6,11 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".GUIActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        />-->
+
+    <com.ortiz.touchview.TouchImageView
+        android:id="@+id/ivmap"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_alignParentRight="true"
@@ -22,6 +27,12 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="C"/>
+
+        <Button
+            android:id="@+id/read"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="I"/>
 
     </LinearLayout>
 
