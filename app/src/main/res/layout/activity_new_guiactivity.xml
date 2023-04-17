@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewGUIActivity">
+
+    <com.ortiz.touchview.TouchImageView
+        android:id="@+id/newivmap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="C"/>
+
+        <Button
+            android:id="@+id/read"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="I"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/draw"
+        android:text="Draw Point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

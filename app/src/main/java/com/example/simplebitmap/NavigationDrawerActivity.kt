@@ -3,14 +3,17 @@ package com.example.simplebitmap
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Build.VERSION
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.simplebitmap.TiltedAnimation.TiltedActivity
 import com.google.android.material.navigation.NavigationView
 
 class NavigationDrawerActivity : AppCompatActivity() {
@@ -21,12 +24,19 @@ class NavigationDrawerActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_STORAGE = 1000
     private val WRITE_EXTERNAL_STORAGE_CODE = 1
 
+    var currentNightMode = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation_drawer)
         requestpermission()
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
+
+        // Get the current night mode from the system settings
+        // Get the current night mode from the system settings
+        currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
 
         toogle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(toogle)
@@ -58,10 +68,36 @@ class NavigationDrawerActivity : AppCompatActivity() {
                     val intent = Intent(this,CSVActivity::class.java)
                     startActivity(intent)
                 }
+                R.id.dxf -> {
+                    val intent = Intent(this,DXFActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.animation -> {
+                    val intent = Intent(this,TiltedActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.rasterimage -> {
+                    val intent = Intent(this,RasterImageActivity::class.java)
+                    startActivity(intent)
+                }
+
+                R.id.themecolor -> {
+                    if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    }
+                    recreate();
+                }
 
             }
             true
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        currentNightMode = newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK
     }
 
     private fun replaceFragment(fragment: Fragment,title: String){

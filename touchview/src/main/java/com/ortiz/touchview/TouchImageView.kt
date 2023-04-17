@@ -909,8 +909,8 @@ open class TouchImageView @JvmOverloads constructor(context: Context, attrs: Att
 
 
           // scaleImage(detector.scaleFactor.toDouble(), detector.focusX, detector.focusY, true)
-            Log.d("prevSpa", detector.currentSpan.toString())
-            Log.d("prevSpan", detector.previousSpan.toString())
+//            Log.d("prevSpa", detector.currentSpan.toString())
+//            Log.d("prevSpan", detector.previousSpan.toString())
 
 
 

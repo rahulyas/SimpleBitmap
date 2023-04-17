@@ -25,5 +25,32 @@
         android:icon="@drawable/ic_baseline_content_paste_24"
         />
 
+    <item
+        android:id="@+id/dxf"
+        android:title="DXF Reader"
+        android:icon="@drawable/ic_baseline_dxf_24"
+        />
+
+    <item
+        android:id="@+id/animation"
+        android:title="Tilted Animation"
+        android:icon="@drawable/ic_baseline_animation_24"
+        />
+
+    <item
+        android:id="@+id/rasterimage"
+        android:title="Raster Image"
+        android:icon="@drawable/ic_baseline_animation_24"
+        />
+
+
+    <item
+        android:id="@+id/themecolor"
+        android:title="ThemeColor"
+        android:icon="@drawable/ic_baseline_color_lens_24"
+        />
+
+
+
 
 </menu>

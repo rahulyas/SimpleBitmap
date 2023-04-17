@@ -4,37 +4,27 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Point
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.view.Display
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.apogee.customgui.MainActivity
-import com.ortiz.touchview.OnTouchImageViewListener
+import com.apogee.customgui.NewMainActivity
+import com.example.simplebitmap.R
 import com.ortiz.touchview.TouchImageView
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 import java.io.IOException
 import java.text.DecimalFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
-class GUIActivity : AppCompatActivity() {
-
+class NewGUIActivity : AppCompatActivity() {
     lateinit var imageview : TouchImageView
-//    var x : Double = 125.0
-//    var y : Double = 250.0
-//    var newx = ArrayList<Double>()
-//    var newy = ArrayList<Double>()
-    var factorX = 0.0
-    var factorY = 0.0
     var factorXY = 0.0
     var width = 0
     var height = 0
@@ -55,13 +45,21 @@ class GUIActivity : AppCompatActivity() {
     lateinit var ArraysT: Array<String>
     var arrayListX = ArrayList<Double>()
     var arrayListY = ArrayList<Double>()
-    var pointName =  ArrayList<String>()
-
+    var finalpoint =  ArrayList<String>()
+    var prefix =  ArrayList<String>()
+    var code =  ArrayList<String>()
+    var misc1 =  ArrayList<String>()
+    var misc2 =  ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        setContentView(R.layout.activity_new_guiactivity)
         requestpermission()
+
+        val imageView = findViewById<TouchImageView>(R.id.newivmap)
+        val clear = findViewById<Button>(R.id.clear)
+        val draw = findViewById<Button>(R.id.draw)
+        val import = findViewById<Button>(R.id.read)
+
         val currentdisplay = windowManager.defaultDisplay
         val dw = currentdisplay.width.toInt()
         val dh = currentdisplay.height.toInt()
@@ -70,42 +68,25 @@ class GUIActivity : AppCompatActivity() {
 
         bmp = Bitmap.createBitmap(dw, dh, Bitmap.Config.ARGB_8888)
 
-
-        val imageView = findViewById<TouchImageView>(R.id.ivmap)
-        val clear = findViewById<Button>(R.id.clear)
-        val draw = findViewById<Button>(R.id.draw)
-        val import = findViewById<Button>(R.id.read)
-/////////////////////////// Here we use CustomUi Module /////////////////////////////////////
-        val mainActivity : com.apogee.customgui.MainActivity= MainActivity()
+        val mainActivity : com.apogee.customgui.NewMainActivity= NewMainActivity()
         mainActivity.intiliaze(imageView = imageView,this)
-
-        clear.setOnClickListener {
-            mainActivity.clearpoints()
-        }
-
-//        newx.add(500.2)
-//        newx.add(361.0)
-//        newx.add(1050.50)
-//        newx.add(3256.0)
-//        newx.add(2201.100)
-//        newy.add(361.2)
-//        newy.add(500.2)
-//        newy.add(1155.2)
-//        newy.add(2500.2)
-//        newy.add(3264.2)
-//        Log.i("Tag","newx:= " +newx)
-//        Log.i("Tag","newy:= " +newy)
 
         draw.setOnClickListener {
             Log.d("TAG", arrayListX.size.toString())
 
+
             for(i in 0 until arrayListX.size){
-                pointName.add(i.toString())
+                finalpoint.add(i.toString())
+                prefix.add(i.toString())
+                code.add(i.toString())
+                misc1.add(i.toString())
+                misc2.add(i.toString())
             }
-                val factorXY1= mainActivity.addPoints(arrayListX, arrayListY,pointName)
-                factorXY=factorXY1.toDouble()
-                Log.d("TAG", "factorXY: "+factorXY)
-                Toast.makeText(this,"checkkk",Toast.LENGTH_SHORT).show()
+            val factorXY1= mainActivity.pointplot(arrayListX, arrayListY,finalpoint,prefix,code,misc1,misc2)
+            mainActivity.canvasdraw()
+            factorXY=factorXY1.toDouble()
+            Log.d("TAG", "factorXY: "+factorXY)
+            Toast.makeText(this,"checkkk", Toast.LENGTH_SHORT).show()
 //              mainActivity.addPoint(125.0, 250.0,"A")
         }
 
@@ -114,75 +95,6 @@ class GUIActivity : AppCompatActivity() {
             intent.type = "*/*"
             startActivityForResult(Intent.createChooser(intent, "Select CSV file"), PICK_TEXT)
         })
-
-/////////////////////////// Here we use TouchView Module //////////////////////////////////
-        imageView.setOnTouchImageViewListener(object : OnTouchImageViewListener {
-
-            override fun onMove(x: Float, y: Float, scaleFactor: Float) {
-                if(arrayListX.size > 0){
-                if(x< bmp.width && y < bmp.height){
-//                    val changeSpanX = ((curSpanX - prevSpanX ) * 1.5)
-//                    val changeSpanY = ((curSpanY - prevSpanY ) * 1.5)
-//                    factorX =  ((changeSpanX/dw) * factorX) + factorX
-//                    factorY =  ((changeSpanY/dh) * factorY) + factorY
-//                    mainActivity.pointZoomplot(factorX, factorY)
-//                    Log.i("Tag","FactorX:= " +factorX)
-//                    Log.i("Tag","FactorY:= " +factorY)
-                    val changeSpanX = (curSpanX - prevSpanX)
-                    factorXY = ((changeSpanX / dw) * factorXY) + factorXY
-                    isScaleSetFirstTime = false
-                    mainActivity.pointZoomplot(factorXY)
-                    Log.i("Tag","FactorXY:= " +factorXY)
-                    Log.i("Tag","changeSpanX:= " +changeSpanX)
-//                    Log.i("Tag","changeSpanY:= " +changeSpanY)
-
-                }
-                }
-
-            }
-
-            override fun onScaleBegin(x: Float, y: Float, scaleFactor: Float) {
-
-            }
-
-            override fun onScaleEnd(x: Float, y: Float,scaleFactor : Float) {
-
-            }
-
-            override fun onDrag(deltax: Float, deltay: Float) {
-                if(arrayListX.size > 0){
-                    deltaX = deltax
-                    deltaY = -deltay
-//                    deltaX = threeDecimalPlaces.format((deltaX / factorX.toFloat()).toDouble()).toFloat()
-//                    deltaY = threeDecimalPlaces.format((deltaY / factorY.toFloat()).toDouble()).toFloat()
-                    deltaX = (deltaX / factorXY.toFloat())
-                    deltaY = (deltaY / factorXY.toFloat())
-                    mainActivity.scrollplot(deltaX,deltaY)
-//                    Log.i("Tag","deltaX:= " +deltaX)
-//                    Log.i("Tag","deltaX:= " +deltaX)
-                    isScaleSetFirstTime = false
-                }
-            }
-
-            override fun onSpan(currX: Float, currY: Float, prevX: Float, prevY: Float) {
-                curSpanX = currX
-                curSpanY = currY
-                prevSpanX = prevX
-                prevSpanY = prevY
-//
-                Log.i("Tag","curSpanX:= " +curSpanX)
-                Log.i("Tag","curSpanY:= " +curSpanY)
-                Log.i("Tag","prevSpanX:= " +prevSpanX)
-                Log.i("Tag","prevSpanY:= " +prevSpanY)
-
-            }
-
-            override fun onSingleTap(x: Float, y: Float) {
-
-            }
-
-        })
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -266,5 +178,4 @@ class GUIActivity : AppCompatActivity() {
             )
         }
     }
-
 }

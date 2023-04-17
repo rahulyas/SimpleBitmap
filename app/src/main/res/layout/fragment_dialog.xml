@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DialogFragment">
+
+    <com.example.simplebitmap.TiltedAnimation.TiltedLineView
+        android:id="@+id/tiltedLineView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true" />
+
+    <Button
+        android:id="@+id/buttonPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tiltedLineView"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentRight="true"
+        android:text="v"/>
+
+</RelativeLayout>
