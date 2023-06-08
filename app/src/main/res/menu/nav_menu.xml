@@ -43,6 +43,12 @@
         android:icon="@drawable/ic_baseline_animation_24"
         />
 
+    <item
+        android:id="@+id/osm"
+        android:title="OSM MAP"
+        android:icon="@drawable/ic_baseline_map_24"
+        />
+
 
     <item
         android:id="@+id/themecolor"

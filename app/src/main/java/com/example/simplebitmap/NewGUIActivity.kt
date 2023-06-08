@@ -68,7 +68,7 @@ class NewGUIActivity : AppCompatActivity() {
 
         bmp = Bitmap.createBitmap(dw, dh, Bitmap.Config.ARGB_8888)
 
-        val mainActivity : com.apogee.customgui.NewMainActivity= NewMainActivity()
+        val mainActivity : com.apogee.customgui.MainActivity= MainActivity()
         mainActivity.intiliaze(imageView = imageView,this)
 
         draw.setOnClickListener {
@@ -82,9 +82,9 @@ class NewGUIActivity : AppCompatActivity() {
                 misc1.add(i.toString())
                 misc2.add(i.toString())
             }
-            val factorXY1= mainActivity.pointplot(arrayListX, arrayListY,finalpoint,prefix,code,misc1,misc2)
-            mainActivity.canvasdraw()
-            factorXY=factorXY1.toDouble()
+/*            val factorXY1= mainActivity.pointplot(arrayListX, arrayListY,finalpoint,prefix,code,misc1,misc2)
+            mainActivity.canvasdraw()*/
+//            factorXY=factorXY1.toDouble()
             Log.d("TAG", "factorXY: "+factorXY)
             Toast.makeText(this,"checkkk", Toast.LENGTH_SHORT).show()
 //              mainActivity.addPoint(125.0, 250.0,"A")

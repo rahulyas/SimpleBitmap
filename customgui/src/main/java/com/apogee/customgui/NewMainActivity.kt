@@ -1,13 +1,12 @@
 package com.apogee.customgui
 
 import android.graphics.*
-import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
-
+import android.util.Log
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.math.abs
+import java.util.stream.Collectors
+import kotlin.time.measureTime
 
 class NewMainActivity : AppCompatActivity() {
 
@@ -15,56 +14,34 @@ class NewMainActivity : AppCompatActivity() {
     var width = 0
     var height = 0
     lateinit var bmp: Bitmap
-    lateinit var operation: Bitmap
-
-    var meanX = 0.0
-    var meanY = 0.0
-    var currentPosition = "CurrentPosition"
-    var diffX = 0.0
-    var diffY = 0.0
+    lateinit var bitmap: Bitmap
+    lateinit var canvas : Canvas
+    var paint = Paint()
+    var textpaint = Paint()
+    val line = Paint()
     // in this we get the point of x and y coordinates from .land xml file
     var referValueX = ArrayList<Double>()
     var referValueY = ArrayList<Double>()
-    val pointName = ArrayList<String>()
-    // this scale
-    var factorXY = 0.0
-    // this is new pixel we get after Calculation
-    var xpixel = ArrayList<Int>()
-    var ypixel = ArrayList<Int>()
 
-    var isReset = true
-    // this want to change
-    var deltaX: Float = 0f
-    var deltaY: Float = 0f
-
-    var isFirstReference = true
-    var referenceX = 0.0
-    var referenceY = 0.0
-
-    val codeNameList : ArrayList<String> = ArrayList()
-    val prefixNameList:ArrayList<String> =ArrayList()
-    val misc1List: ArrayList<String> = ArrayList()
-    val misc2List: ArrayList<String> = ArrayList()
-
-    var isZoomtofit = false
-    var isScroll = false
-
+    var plotValueX = ArrayList<Double>()
+    var plotValueY = ArrayList<Double>()
+    val pointName : ArrayList<String> = ArrayList()
     var minX = 0.0
-    var minY = 0.0
     var maxX = 0.0
+    var minY = 0.0
     var maxY = 0.0
-    var diffRefereX = 0.0
-    var diffRefereY = 0.0
-
-    lateinit var paint: Paint
-    lateinit var canvas: Canvas
-    lateinit var textpaint: Paint
-    val dotted = Paint()
-    val line = Paint()
-    val plPaint = Paint()
-    val pgPaint = Paint()
-    val cr1Paint = Paint()
-    val arcPaint = Paint()
+    var differenceX = 0.0
+    var differenceY = 0.0
+    var differenceXY = 0.0
+    var meanofX = 0.0
+    var meanofY = 0.0
+    var scaleXY = 0.0
+    var diffX = 0.0
+    var diffY = 0.0
+    var deltaX : Float = 0f
+    var deltaY : Float = 0f
+    var pixelofX = ArrayList<Double>()
+    var pixelofY = ArrayList<Double>()
 
     fun intiliaze(imageView: ImageView, context: AppCompatActivity){
         this.imageview = imageView
@@ -73,316 +50,190 @@ class NewMainActivity : AppCompatActivity() {
         display.getSize(size)
         width = size.x
         height = size.y
-
         bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-
     }
 
-//    private fun pointplot(Easting: Double, Northing: Double, finalpoint: String, prefix: String, code : String, misc1 : String, misc2 : String) {
-//        val value1 = Easting
-//        val value2 = Northing
-//        if (isFirstReference) {
-//            isFirstReference = false
-//            referenceX = value1
-//            referenceY = value2
-//        }
-//        if (pointName.contains(currentPosition) ){
-//            val currIndex = pointName.indexOf(currentPosition)
-//            pointName.removeAt(currIndex)
-//            codeNameList.removeAt(currIndex)
-//            prefixNameList.removeAt(currIndex)
-//            referValueX.removeAt(currIndex)
-//            referValueY.removeAt(currIndex)
-//            misc1List.removeAt(currIndex)
-//            misc2List.removeAt(currIndex)
-//            referValueX.add(Easting)
-//            referValueY.add(Northing)
-//            pointName.add(finalpoint)
-//            prefixNameList.add(prefix)
-//            codeNameList.add(code)
-//            misc1List.add(misc1)
-//            misc2List.add(misc2)
-//        } else {
-//            if(!pointName.contains(finalpoint))
-//            {
-//                referValueX.add(value1)
-//                referValueY.add(value2)
-//                pointName.add(finalpoint)
-//                prefixNameList.add(prefix)
-//                codeNameList.add(code)
-//                misc1List.add(misc1)
-//                misc2List.add(misc2)
-//
-//            }
-//        }
-//        var diffXY = 0.0
-//
-//        if(referValueX.size < 3 || isZoomtofit){
-//            minX = Collections.min(referValueX)
-//            minY = Collections.min(referValueY)
-//            maxX = Collections.max(referValueX)
-//            maxY = Collections.max(referValueY)
-//            diffRefereX = abs(maxX - minX)
-//            diffRefereY = abs(maxY - minY)
-//
-//            meanX = (minX + maxX) / 2
-//            meanY = (minY + maxY) / 2
-//            diffXY = Math.max(diffRefereX, diffRefereY)
-//        }
-//
-//        if(isZoomtofit){
-//            isZoomtofit = false
-//            deltaX = 0f
-//            deltaY = 0f
-//            diffX = 0.0
-//            diffY = 0.0
-//            factorXY = width / diffXY
-//        }else if(!isScroll){
-//            factorXY = width / 10.0
-//
-//        }
-//        getPixelPoint()
-//
-//
-//    }
-    fun pointplot(Easting: ArrayList<Double>, Northing: ArrayList<Double>, finalpoint: ArrayList<String>, prefix: ArrayList<String>, code : ArrayList<String>, misc1 : ArrayList<String>, misc2 : ArrayList<String>) :String{
-//        val value1 = Easting
-//        val value2 = Northing
-        if (isFirstReference) {
-            isFirstReference = false
-            referenceX = Easting[0]
-            referenceY = Northing[0]
-        }
-        if (pointName.contains(currentPosition) ){
-            val currIndex = pointName.indexOf(currentPosition)
-            pointName.removeAt(currIndex)
-            codeNameList.removeAt(currIndex)
-            prefixNameList.removeAt(currIndex)
-            referValueX.removeAt(currIndex)
-            referValueY.removeAt(currIndex)
-            misc1List.removeAt(currIndex)
-            misc2List.removeAt(currIndex)
-            referValueX.addAll(Easting)
-            referValueY.addAll(Northing)
-            pointName.addAll(finalpoint)
-            prefixNameList.addAll(prefix)
-            codeNameList.addAll(code)
-            misc1List.addAll(misc1)
-            misc2List.addAll(misc2)
-        } else {
-            if(!pointName.contains(finalpoint[0]))
-            {
-                referValueX.addAll(Easting)
-                referValueY.addAll(Northing)
-                pointName.addAll(finalpoint)
-                prefixNameList.addAll(prefix)
-                codeNameList.addAll(code)
-                misc1List.addAll(misc1)
-                misc2List.addAll(misc2)
+    fun addPoints(x : ArrayList<Double>, y : ArrayList<Double> , name : ArrayList<String>){
+        referValueX.addAll(x)
+        referValueY.addAll(y)
+        pointName.addAll(name)
 
-            }
-        }
-        var diffXY = 0.0
-
-        if(referValueX.size < 3 || isZoomtofit){
-            minX = Collections.min(referValueX)
-            minY = Collections.min(referValueY)
-            maxX = Collections.max(referValueX)
-            maxY = Collections.max(referValueY)
-            diffRefereX = abs(maxX - minX)
-            diffRefereY = abs(maxY - minY)
-
-            meanX = (minX + maxX) / 2
-            meanY = (minY + maxY) / 2
-            diffXY = Math.max(diffRefereX, diffRefereY)
-        }
-
-        if(isZoomtofit){
-            isZoomtofit = false
-            deltaX = 0f
-            deltaY = 0f
-            diffX = 0.0
-            diffY = 0.0
-            factorXY = width / diffXY
-        }else if(!isScroll){
-            factorXY = width / 10.0
-
-        }
-        getPixelPoint()
-        pointplotOnBitmap()
-
-    return factorXY.toString()
-
-    }
-    fun clearpoints(){
-        xpixel.clear()
-        ypixel.clear()
-        getPixelPoint()
+        minX = Collections.min(referValueX)
+        maxX = Collections.max(referValueX)
+        minY = Collections.min(referValueY)
+        maxY = Collections.max(referValueY)
+        differenceX = maxX - minX
+        differenceY = maxY - minY
+        differenceXY = Math.max(differenceX, differenceY)
+        scaleXY = (width / differenceXY)
+        Log.d("TAG", "Firstscale: $scaleXY")
+        meanofX = (minX + maxX) / 2
+        meanofY = (minY + maxY) / 2
+        getPixel()
     }
 
-    fun getPixelPoint() {
+    fun getPixel(): String {
+        bitmap = Bitmap.createBitmap(bmp.width, bmp.height, bmp.config)
+        canvas = Canvas(bitmap)
         var plotX: Double
         var plotY: Double
-        val plotValueX : ArrayList<Double> = ArrayList()
-        val plotValueY : ArrayList<Double> = ArrayList()
-        plotValueX.addAll(referValueX)
-        plotValueY.addAll(referValueY)
 
-
+        plotValueX = ArrayList(referValueX)
+        plotValueY = ArrayList(referValueY)
 
         if (plotValueX.size > 1) {
-            val centerPointX =  ((width - 100)/2) / factorXY
-            val centerPointY =  ((height - 100)/2) / factorXY
-
-            val minbandX = meanX - centerPointX
-            val maxbandX = meanX + centerPointX
-            val minbandY = meanY - centerPointY
-            val maxbandY = meanY + centerPointY
-            var isOutsideband = 0
-
-            for (i in 0 until  pointName.size){
-                if(pointName[i] == currentPosition){
-                    if(isReset){
-                        if(((plotValueX[i] +diffX+deltaX))< minbandX  || ((plotValueX[i] + diffX) + deltaX)  > maxbandX   || ((plotValueY[i] + diffY) + deltaY) < minbandY  || ((plotValueY[i] + diffY) + deltaY) > maxbandY){
-
-                            diffX = meanX - plotValueX[i]
-                            diffY = meanY - plotValueY[i]
-
-                            deltaX = 0f
-                            deltaY = 0f
-                        }
-                    }else{
-                        if(plotValueX[i] < minbandX  || plotValueX[i] > maxbandX   || plotValueY[i]< minbandY  || plotValueY[i] > maxbandY){
-                            diffX = meanX - plotValueX[i]
-                            diffY = meanY - plotValueY[i]
-                        }
-                    }
-
-                }
+            for (i in plotValueX.indices) {
+                val value: Double = plotValueX[i] + diffX + deltaX
+                plotValueX[i] = value
             }
-
-            for (i in 0 until plotValueX.size) {
-                plotValueX[i] = (plotValueX[i] + diffX) + deltaX
+            for (i in plotValueY.indices) {
+                val value: Double = plotValueY[i] + diffY + deltaY
+                plotValueY[i] = value
             }
-            for (i in 0 until plotValueY.size) {
-                plotValueY[i] = (plotValueY[i] + diffY) + deltaY
-            }
-
-            xpixel.clear()
-            ypixel.clear()
-
-            for (i in 0 until plotValueX.size) {
-                if (plotValueX[i] > meanX) {
-                    plotX = (width / 2) + ((Math.abs(meanX - plotValueX[i] )) * factorXY)
+            pixelofX.clear()
+            pixelofY.clear()
+            for (i in plotValueX.indices) {
+                plotX = if (plotValueX[i] > meanofX) {
+                    width / 2 + Math.abs(meanofX - plotValueX[i]) * scaleXY
                 } else {
-                    plotX = (width / 2) - ((Math.abs(meanX - plotValueX[i] )) * factorXY)
+                    width / 2 - Math.abs(meanofX - plotValueX[i]) * scaleXY
                 }
-                //  plotX = (referValueX[i] - minX) * factorXY
-                xpixel.add(plotX.toInt())
-            }
+                pixelofX.add(plotX)
 
-            for (i in 0 until plotValueY.size) {
-                if (plotValueY[i] > meanY) {
-                    plotY = (height / 2) + ((Math.abs(meanY - plotValueY[i] )) * factorXY)
+                plotY = if (plotValueY[i] > meanofY) {
+                    height / 2 + Math.abs(meanofY - plotValueY[i]) * scaleXY
                 } else {
-                    plotY = (height / 2) - ((Math.abs(meanY - plotValueY[i] )) * factorXY)
+                    height / 2 - Math.abs(meanofY - plotValueY[i]) * scaleXY
                 }
-                //  plotY = (referValueY[i] - minY) * factorXY
                 plotY = height - plotY
-                ypixel.add(plotY.toInt())
+                pixelofY.add(plotY)
+////////////////////////////////
+                paint = Paint()
+                paint.color = Color.RED
+                paint.strokeWidth = 5f
+                canvas.drawCircle(plotX.toFloat(), plotY.toFloat(), 5f, paint)
+                imageview.setImageBitmap(bitmap)
             }
+
+
         }
+//        drawpixelpoint()
+        return scaleXY.toString()
     }
 
-    fun canvasdraw() {
-        paint = Paint()
-        canvas = Canvas(bmp!!)
-        paint.strokeWidth = 5f
-        textpaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        textpaint.color = Color.rgb(110, 110, 110)
-        textpaint.textSize = 16f
+    fun zoomgetPixel(scaleXY : Double): String {
+        var plotX: Double
+        var plotY: Double
 
+        val plotValueX = ArrayList(referValueX)
+        val plotValueY = ArrayList(referValueY)
 
-        dotted.color = Color.BLUE
-        dotted.strokeWidth = 2f
-        dotted.pathEffect = DashPathEffect(floatArrayOf(10f, 10f), 5f)
-        dotted.isAntiAlias=true
-
-        line.color = Color.BLACK
-        line.strokeWidth = 3f
-        line.isAntiAlias=true
-
-        plPaint.color = Color.BLACK
-        plPaint.strokeWidth = 3f
-        plPaint.isAntiAlias=true
-
-        pgPaint.color = Color.BLACK
-        pgPaint.strokeWidth = 3f
-        pgPaint.isAntiAlias=true
-
-        cr1Paint.color = Color.BLACK
-        cr1Paint.strokeWidth = 3f
-        cr1Paint.style = Paint.Style.STROKE
-        cr1Paint.isAntiAlias=true
-
-        arcPaint.color = Color.RED
-        arcPaint.style = Paint.Style.STROKE
-        arcPaint.strokeWidth = 3f
-        arcPaint.isAntiAlias=true
-    }
-
-    fun pointplotOnBitmap(){
-        operation = Bitmap.createBitmap(bmp.width, bmp.height, bmp.config)
-        val paint = Paint()
-        canvas = Canvas(operation)
-        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
-        if (xpixel.size != 0 && ypixel.size != 0) {
-            for (k in xpixel.indices) {
-                if (k == xpixel.size - 1) {
-                    paint.color = Color.GREEN
-                    paint.strokeWidth = 5f
-                    canvas.drawBitmap(operation, Matrix(), null)
-                    canvas.drawCircle(xpixel[k].toFloat(), ypixel[k].toFloat(), 10f, paint)
-                    val textpaint = Paint(Paint.ANTI_ALIAS_FLAG)
-                    // text color - #3D3D3D
-                    textpaint.color = Color.rgb(110, 110, 110)
-                    // text size in pixels
-                    textpaint.textSize = 16f
-                    // text shadow
-                    //    paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
-                    canvas.drawText(pointName[k],xpixel[k].toFloat(),ypixel[k].toFloat(),textpaint)
+        if (plotValueX.size > 1) {
+            for (i in plotValueX.indices) {
+                val value: Double = plotValueX[i] + diffX + deltaX
+                plotValueX[i] = value
+            }
+            for (i in plotValueY.indices) {
+                val value: Double = plotValueY[i] + diffY + deltaY
+                plotValueY[i] = value
+            }
+            pixelofX.clear()
+            pixelofY.clear()
+            for (i in plotValueX.indices) {
+                plotX = if (plotValueX[i] > meanofX) {
+                    width / 2 + Math.abs(meanofX - plotValueX[i]) * scaleXY
                 } else {
-                    paint.color = Color.BLACK
-                    paint.strokeWidth = 5f
-                    canvas.drawBitmap(operation, Matrix(), null)
-                    canvas.drawCircle(xpixel[k].toFloat(), ypixel[k].toFloat(), 10f, paint)
-                    val textpaint = Paint(Paint.ANTI_ALIAS_FLAG)
-                    // text color - #3D3D3D
-                    textpaint.color = Color.rgb(110, 110, 110)
-                    // text size in pixels
-                    textpaint.textSize = 16f
-                    // text shadow
-                    //  paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
-                    canvas.drawText(pointName[k],xpixel[k].toFloat(),ypixel[k].toFloat(),textpaint)
+                    width / 2 - Math.abs(meanofX - plotValueX[i]) * scaleXY
                 }
+                pixelofX.add(plotX)
+            }
+            for (i in plotValueY.indices) {
+                plotY = if (plotValueY[i] > meanofY) {
+                    height / 2 + Math.abs(meanofY - plotValueY[i]) * scaleXY
+                } else {
+                    height / 2 - Math.abs(meanofY - plotValueY[i]) * scaleXY
+                }
+                plotY = height - plotY
+                pixelofY.add(plotY)
             }
         }
-        else if(pointName.size > 0) {
-            paint.color = Color.BLACK
-            paint.strokeWidth = 5f
-            canvas.drawBitmap(operation, Matrix(), null)
-            canvas.drawCircle((width/2).toFloat(), (height/2).toFloat(), 8f, paint)
-            val textpaint = Paint(Paint.ANTI_ALIAS_FLAG)
-            // text color - #3D3D3D
-            textpaint.color = Color.rgb(110, 110, 110)
-            // text size in pixels
-            textpaint.textSize = 16f
-            // text shadow
-            //  paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
-            canvas.drawText(pointName[0],(width/2).toFloat(),(height/2).toFloat(),textpaint)
-        }
-        imageview.setImageBitmap(operation)
+        drawpixelpoint()
+        return scaleXY.toString()
     }
 
+    fun scrollgetPixel(scaleXY : Double,deltaX : Float,deltaY : Float): String {
+        bitmap = Bitmap.createBitmap(bmp.width, bmp.height, bmp.config)
+        canvas = Canvas(bitmap)
+        var plotX: Double
+        var plotY: Double
+        pixelofX.clear()
+        pixelofY.clear()
+        plotValueX = ArrayList(referValueX)
+        plotValueY = ArrayList(referValueY)
 
+        if (plotValueX.size > 1) {
+            plotValueX.replaceAll { num -> num + deltaX }
+            plotValueY.replaceAll { num -> num + deltaY }
+
+/*            val modifiedNumbersofX: MutableList<Double> = plotValueX.stream()
+                .map { number -> width / 2 + (if (number > meanofX) 1 else -1) * Math.abs(meanofX - number) * scaleXY }
+                .collect(Collectors.toList())
+            pixelofX.addAll(modifiedNumbersofX)
+
+            val modifiedNumbersofY: MutableList<Double> = plotValueY.stream()
+                .map { number -> width / 2 + (if (number > meanofY) 1 else -1) * Math.abs(meanofY - number) * scaleXY }
+                .collect(Collectors.toList())
+            modifiedNumbersofY.replaceAll { num -> height - num}
+            pixelofY.addAll(modifiedNumbersofY)*/
+
+            repeat(plotValueX.size) { i ->
+                plotX = width / 2 + (if (plotValueX[i] > meanofX) 1 else -1) * Math.abs(meanofX - plotValueX[i]) * scaleXY
+                pixelofX.add(plotX)
+
+                ////////////////////////////////////////////////////////////////
+                plotY = width / 2 + (if (plotValueY[i] > meanofY) 1 else -1) * Math.abs(meanofY - plotValueY[i]) * scaleXY
+                val plotYFlipped = height - plotY
+                pixelofY.add(plotYFlipped)
+
+                paint = Paint()
+                paint.color = Color.RED
+                paint.strokeWidth = 5f
+                canvas.drawCircle(plotX.toFloat(), plotYFlipped.toFloat(), 5f, paint)
+                imageview.setImageBitmap(bitmap)
+            }
+        }
+//        drawpixelpoint()
+        return scaleXY.toString()
+    }
+
+    fun drawpixelpoint() {
+
+            bitmap = Bitmap.createBitmap(bmp.width, bmp.height, bmp.config)
+            canvas = Canvas(bitmap)
+            var j = 0
+        while (j < pixelofX.size && j < pixelofY.size) {
+            paint = Paint()
+            textpaint = Paint()
+            paint.color = Color.RED
+            textpaint.color = Color.BLACK
+            canvas.drawCircle(pixelofX[j].toFloat(), pixelofY[j].toFloat(), 5f, paint)
+            canvas.drawText(pointName[j],pixelofX[j].toFloat(), pixelofY[j].toFloat(), textpaint)
+            imageview.setImageBitmap(bitmap)
+            j++
+        }
+
+
+    }
+
+    fun clearpoints(){
+        referValueX.clear()
+        referValueY.clear()
+        pointName.clear()
+        pixelofX.clear()
+        pixelofY.clear()
+        bitmap = Bitmap.createBitmap(bmp.width, bmp.height, bmp.config)
+        canvas = Canvas(bitmap)
+        paint.color = Color.TRANSPARENT
+        imageview.setImageBitmap(bitmap)
+    }
 }

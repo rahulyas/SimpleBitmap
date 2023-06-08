@@ -702,7 +702,7 @@ class Bitmap : AppCompatActivity() {
                 temp_rows = scanner.nextLine()
                 splited_temp_rows = temp_rows.split(",").toTypedArray()
                 val temp_data = ArrayList<String>()
-                temp_data.add(splited_temp_rows[index_point_name])
+                temp_data.add(splited_temp_rows[0])
                 temp_data.add(splited_temp_rows[index_easting])
                 temp_data.add(splited_temp_rows[index_northing])
                 temp_data.add(splited_temp_rows[index_elevation])

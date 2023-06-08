@@ -125,67 +125,6 @@ class MainActivity : AppCompatActivity() {
         return factorXY.toString()
     }
 
-//    fun addPoint(x: Double, y: Double, name: String): String{
-//        val value1 = x
-//        val value2 = y
-//
-//        if (isFirstReference) {
-//            isFirstReference = false
-//            referenceX = value1
-//            referenceY = value2
-//        }
-//        referValueX.add(value1)
-//        referValueY.add(value2)
-//        pointName.add(name)
-//        if(isScaleSetFirstTime || isReset){
-//            minX = Collections.min(referValueX)
-//            minY = Collections.min(referValueY)
-//            maxX = Collections.max(referValueX)
-//            maxY = Collections.max(referValueY)
-//            diffRefereX = abs(maxX - minX)
-//            diffRefereY = abs(maxY - minY)
-//            val Xs: Double
-//            val Ys: Double
-//            Xs = diffRefereX
-//            Ys = diffRefereY
-//            PXmin = minX - diffRefereX / 4
-//            PYmin = minY - diffRefereY / 4
-//            PXmax = maxX + diffRefereX / 4
-//            PYmax = maxY + diffRefereY / 4
-//
-//            factorX = width / Xs
-//            factorY = height / Ys
-//        }
-//
-//        var plotX: Double
-//        var plotY: Double
-//        if (referValueX.size > 1) {
-//            xpixel.clear()
-//            ypixel.clear()
-//            for (i in 0 until referValueX.size) {
-//                plotX = (referValueX[i] - minX) * factorX
-//                if(plotX == 0.0){
-//                    plotX += 10  // if point is plot at 0 xaxis, 10 pixel will be added
-//                }else if(plotX == bmp!!.width.toDouble()){
-//                    plotX -= 10 // if point is plot at heighest xaxis, 10 pixel will be deduct
-//                }
-//                xpixel.add(plotX.toInt())
-//            }
-//            for (i in 0 until referValueY.size) {
-//                plotY = (referValueY[i] - minY) * factorY
-//                plotY = height - plotY
-//                if(plotY == 0.0){
-//                    plotY += 10  // if point is plot at 0 yaxis, 10 pixel will be added
-//                }else if(plotY == bmp!!.height.toDouble()){
-//                    plotY -= 10 // if point is plot at heighest yaxis, 10 pixel will be deduct
-//                }
-//                ypixel.add(plotY.toInt())
-//            }
-//        }
-//        pointplotOnBitmap()
-//        return factorX.toString()+","+factorY.toString()
-//    }
-
     fun clearpoints(){
         xpixel.clear()
         ypixel.clear()

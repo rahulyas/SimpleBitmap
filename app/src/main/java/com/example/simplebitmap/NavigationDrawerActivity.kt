@@ -81,6 +81,12 @@ class NavigationDrawerActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
+                R.id.osm -> {
+                    val intent = Intent(this,OSMActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
                 R.id.themecolor -> {
                     if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

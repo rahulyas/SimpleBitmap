@@ -34,6 +34,12 @@
             android:layout_height="50dp"
             android:text="I"/>
 
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="R"/>
+
     </LinearLayout>
 
     <Button
