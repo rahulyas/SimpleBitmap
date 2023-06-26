@@ -84,7 +84,11 @@ class NavigationDrawerActivity : AppCompatActivity() {
                 R.id.osm -> {
                     val intent = Intent(this,OSMActivity::class.java)
                     startActivity(intent)
-                    finish()
+                }
+
+                R.id.osm2 -> {
+                    val intent = Intent(this,OSMActivity2::class.java)
+                    startActivity(intent)
                 }
 
                 R.id.themecolor -> {
