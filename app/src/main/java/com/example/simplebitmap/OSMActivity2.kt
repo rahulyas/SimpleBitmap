@@ -2,18 +2,21 @@ package com.example.simplebitmap
 
 import android.Manifest
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -22,11 +25,13 @@ import androidx.core.content.ContextCompat
 import com.example.simplebitmap.databinding.ActivityOsmactivity2Binding
 import com.google.android.gms.maps.model.LatLng
 import org.osmdroid.api.IGeoPoint
+import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
+import org.osmdroid.views.Projection
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Overlay
@@ -46,7 +51,6 @@ import java.lang.Math.sqrt
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.Arrays
-import java.util.HashMap
 import java.util.Scanner
 import kotlin.math.pow
 
@@ -91,7 +95,8 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
     var lwpolyline_map = HashMap<String, ArrayList<String>>()
     var polyline_map = HashMap<String, ArrayList<ArrayList<String>>>()
     var polygon_map = HashMap<String, ArrayList<ArrayList<String>>>()
-
+    var Newlwpolyline_map = HashMap<String, MutableList<GeoPoint>>()
+    var XmltrianglePoint_map = HashMap<String, MutableList<GeoPoint>>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOsmactivity2Binding.inflate(layoutInflater)
@@ -106,34 +111,51 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
                 Manifest.permission.INTERNET
             )
         )
+        val context: Context = applicationContext
+        val isAvailable = isInternetAvailable(context)
+
+
+
+
         map = findViewById(R.id.mapview)
         map.setTileSource(TileSourceFactory.MAPNIK)
+//        map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE)
         map.controller.setZoom(15.0)
         map.zoomController.setVisibility(CustomZoomButtonsController.Visibility.ALWAYS)
         map.setBuiltInZoomControls(false) // this is for remove the zoom control button
         map.setMultiTouchControls(true)
-//        map.setUseDataConnection(false) // Disable data connection for the map
 //        map.setBackgroundColor(Color.WHITE)
-        map.overlays.clear() // Clear any existing overlays
-
-//      Create a custom overlay with a white background
-        val backgroundOverlay = object : Overlay() {
-            override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
-                super.draw(canvas, mapView, shadow)
-                if (!shadow) {
-                    canvas?.drawColor(Color.WHITE)
+        if (isAvailable) {
+            // Internet connectivity is available
+            /*this for load the osmdroid map*/
+            val ctx = this.applicationContext
+            Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
+            Configuration.getInstance().cacheMapTileCount = 100 // Set the desired cache size
+            Configuration.getInstance().cacheMapTileOvershoot = 30 // Set the desired cache overshoot
+        } else {
+            // No internet connection, show an AlertDialog or take appropriate action
+            map.setUseDataConnection(false) // Disable data connection for the map
+            map.overlays.clear() // Clear any existing overlays
+            //      Create a custom overlay with a white background
+            val backgroundOverlay = object : Overlay() {
+                override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
+                    super.draw(canvas, mapView, shadow)
+                    if (!shadow) {
+                        canvas?.drawColor(Color.WHITE)
+                    }
                 }
             }
+            map.overlays.add(backgroundOverlay) // Ad
         }
 
-        map.overlays.add(backgroundOverlay) // Ad
-        isAllFabsVisible = false
         //Scalebar
         val metrics = resources.displayMetrics
         val mScaleBar = ScaleBarOverlay(map)
         mScaleBar.setCentred(true)
         mScaleBar.setScaleBarOffset(metrics.widthPixels / 2, 10)
         map.overlays.add(mScaleBar)
+
+        isAllFabsVisible = false
         binding.addFab.shrink()
         binding.addFab.setOnClickListener {
             isAllFabsVisible = if (!isAllFabsVisible!!) {
@@ -186,30 +208,37 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         val mapEventsOverlay = MapEventsOverlay(this)
         map.overlays.add(0, mapEventsOverlay)
 ////////////////////////////////////////////////////////////////////////
+    /*for example i want to calculate the distance between two Geopoints points*/
+        val geoPoint1 = GeoPoint(40.7128, -74.0060)
+        val geoPoint2 = GeoPoint(34.0522, -118.2437)
+
+        val distance: Double = geoPoint1.distanceToAsDouble(geoPoint2)
+        val newdistance = map.getProjection().metersToPixels(distance.toFloat());
+
+        println("Distance: $distance meters====== $newdistance")
 
     }
 
     override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
         /*this code is working*/
-        if (p != null) {
+/*        if (p != null) {
             val latitude = p.latitude
             val longitude = p.longitude
 
             // Display the coordinates in a toast
             val message = "Latitude: $latitude\nLongitude: $longitude"
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-            // Add a marker at the tapped location
             val marker = Marker(map)
             marker.position = p
             marker.setTitle(p.toString())
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
             map.overlays.add(marker)
-
+*//*
             if (p != null) {
                 drawPolyline(p)
-            }
+            }*//*
         }
-        return false
+        return false*/
 //////////////////////////////////////////////////////////////////////////////////////
         /*This is for to draw a circle in osm map where user enter the radius of circle in meters */
 /*        if (p != null) {
@@ -239,6 +268,71 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             alertDialog.show()
         }
         return false*/
+//////////////////////////////////////////////////////////////////////////////////////////
+        if (p != null) {
+            val touchedPoint = p
+            if (spilitdatapath.contains("xml")){
+                for ((key, value) in XmltrianglePoint_map) {
+                    val key = key
+                    val value = value
+                    val paint = Paint()
+                    paint.color = Color.RED
+                    paint.style = Paint.Style.STROKE
+                    paint.strokeWidth = 4f
+                    for (point in value.indices) {
+                        val point = point
+                        Log.d(TAG, "singleTapConfirmedHelperpoint:+"+point)
+                        val distance = value[point].distanceToAsDouble(touchedPoint)
+                        Log.d(TAG, "singleTapConfirmedHelperdistance: "+distance)
+                        val touchRadiusInPixels = 10
+                        if (distance < touchRadiusInPixels) {
+                            val pointList = value.joinToString(separator = "\n") { it.toString() }
+                            map.overlays.add(drawlines(value,paint))
+                            map.controller.setCenter(value[point])
+                            val alertDialogBuilder = AlertDialog.Builder(this)
+                            alertDialogBuilder.setTitle("Selected Line: $key")
+                            alertDialogBuilder.setMessage(pointList)
+                            alertDialogBuilder.setPositiveButton("OK", null)
+                            alertDialogBuilder.show()
+
+                            return true
+                        }
+                    }
+                }
+            } else if(spilitdatapath.contains("dxf")) {
+                for ((key, value) in Newlwpolyline_map) {
+                    val key = key
+                    val value = value
+                    val paint = Paint()
+                    paint.color = Color.RED
+                    paint.style = Paint.Style.STROKE
+                    paint.strokeWidth = 4f
+                    for (point in value.indices) {
+                        val point = point
+                        Log.d(TAG, "singleTapConfirmedHelperpoint:+"+point)
+                        val distance = value[point].distanceToAsDouble(touchedPoint)
+                        val newdistance = map.getProjection().metersToPixels(distance.toFloat());
+                        Log.d(TAG, "singleTapConfirmedHelperdistance: "+distance+"newdistance: "+newdistance)
+                        val touchRadiusInPixels = 100
+                        if (newdistance < touchRadiusInPixels) {
+                            val pointList = value.joinToString(separator = "\n") { it.toString() }
+                            map.overlays.add(drawlwpolyline(value,paint))
+                            map.controller.setCenter(value[point])
+                            val alertDialogBuilder = AlertDialog.Builder(this)
+                            alertDialogBuilder.setTitle("Selected Line: $key\n Size:= ${value[point]}")
+                            alertDialogBuilder.setMessage(pointList)
+                            alertDialogBuilder.setPositiveButton("OK", null)
+                            alertDialogBuilder.show()
+
+                            return true
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return false
     }
 
     override fun longPressHelper(p: GeoPoint?): Boolean {
@@ -344,11 +438,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             Longitude.add(converted.longitude) // northing
         }
         if (spilitdatapath.contains("xml")){
-            for (i in Latitude.indices) {
-                geoPoints.add(LabelledGeoPoint(Latitude[i], Longitude[i], "Point #$i"))
-            }
             newface_pointlines()
-
         } else if(spilitdatapath.contains("csv")){
             for (i in Latitude.indices) {
                 geoPoints.add(LabelledGeoPoint(Latitude[i], Longitude[i], "Point #$i"))
@@ -805,7 +895,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         for (i in facepoint_inCoordinate.indices) {
             val temp_ListX = ArrayList<Double>()
             val temp_ListY = ArrayList<Double>()
-            var temp_trianglePoint: MutableList<IGeoPoint> = mutableListOf()
+            var temp_trianglePoint: MutableList<GeoPoint> = mutableListOf()
             val temp_newList = facepoint_inCoordinate[i]
             for (k in temp_newList.indices) {
                 if (k % 2 == 0) {
@@ -818,25 +908,38 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             for(j in temp_ListX.indices) {
                 temp_trianglePoint.add(GeoPoint(temp_ListX[j], temp_ListY[j]))
             }
+            XmltrianglePoint_map.put(i.toString(),temp_trianglePoint)
+/*            val paint = Paint()
+            paint.color = Color.BLUE
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 4f
             for(l in temp_trianglePoint.indices) {
-                map.overlays.add(drawlines(temp_trianglePoint,Paint(Paint.ANTI_ALIAS_FLAG)))
+                map.overlays.add(drawlines(temp_trianglePoint,paint))
                 map.controller.setCenter(temp_trianglePoint[l])
-            }
+            }*/
 
             Log.d(TAG, "temp_trianglePoint:="+temp_trianglePoint)
+        }
+        XmltrianglePoint_map.forEach{(key, value) ->
+            val key = key
+            val value = value
+            val paint = Paint()
+            paint.color = Color.BLUE
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 4f
+            for(l in value.indices) {
+                map.overlays.add(drawlines(value,paint))
+                map.controller.setCenter(value[l])
+            }
         }
     }
 
     class drawlines(
-        private val points: List<IGeoPoint>,
+        private val points: List<GeoPoint>,
         private var paint: Paint,
     ) :
         Overlay() {
         override fun draw(canvas: Canvas, mapView: MapView, shadow: Boolean) {
-            paint = Paint()
-            paint.color = Color.BLUE
-            paint.style = Paint.Style.STROKE
-            paint.strokeWidth = 4f
             val startPoint = mapView.projection.toPixels(points[0], null)
             val endPoint = mapView.projection.toPixels(points[1], null)
             val thirdPoint = mapView.projection.toPixels(points[2], null)
@@ -846,8 +949,10 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             path1.lineTo(thirdPoint.x.toFloat(), thirdPoint.y.toFloat())
             path1.lineTo(startPoint.x.toFloat(), startPoint.y.toFloat())
             canvas.drawPath(path1, paint)
+            /*this code is also working*/
 /*            canvas.drawLine(startPoint.x.toFloat(), startPoint.y.toFloat(), endPoint.x.toFloat(), endPoint.y.toFloat(), paint)
-            canvas.drawLine(endPoint.x.toFloat(), endPoint.y.toFloat(), thirdPoint.x.toFloat(), thirdPoint.y.toFloat(), paint)*/
+            canvas.drawLine(endPoint.x.toFloat(), endPoint.y.toFloat(), thirdPoint.x.toFloat(), thirdPoint.y.toFloat(), paint)
+            canvas.drawLine(thirdPoint.x.toFloat(), thirdPoint.y.toFloat(), startPoint.x.toFloat(), startPoint.y.toFloat(), paint)*/
         }
     }
     class drawpoints(
@@ -1194,16 +1299,31 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             for(j in temp_Latitude.indices) {
                 temp_linePoint.add(GeoPoint(temp_Latitude[j], temp_Longitude[j]))
             }
+            Newlwpolyline_map.put(key, temp_linePoint)
 
-            for(l in temp_linePoint.indices) {
+/*            for(l in temp_linePoint.indices) {
                 map.overlays.add(drawlwpolyline(temp_linePoint,Paint(Paint.ANTI_ALIAS_FLAG)))
                 map.controller.setCenter(temp_linePoint[l])
-            }
+            }*/
 
-            Log.d(TAG, "temp_ListEN: "+temp_ListE+"\n"+temp_ListN)
+/*            Log.d(TAG, "temp_ListEN: "+temp_ListE+"\n"+temp_ListN)
             Log.d(TAG, "temp_Latitude: "+temp_Latitude+"\n"+temp_Longitude)
-            Log.d(TAG, "temp_linePoint: "+temp_linePoint)
+            Log.d(TAG, "temp_linePoint: "+temp_linePoint)*/
         }
+        Log.d(TAG, "Newlwpolyline_map:="+Newlwpolyline_map)
+        Newlwpolyline_map.forEach{(key, value) ->
+            val key = key
+            val value = value
+            val paint = Paint()
+            paint.color = Color.GREEN
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 4f
+            for(l in value.indices) {
+                map.overlays.add(drawlwpolyline(value,paint))
+                map.controller.setCenter(value[l])
+            }
+        }
+
     }
 
     class drawlwpolyline(
@@ -1212,14 +1332,10 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
     ) :
         Overlay() {
         override fun draw(canvas: Canvas, mapView: MapView, shadow: Boolean) {
-            paint = Paint()
-            paint.color = Color.BLUE
-            paint.style = Paint.Style.STROKE
-            paint.strokeWidth = 4f
             val path = Path()
             for (i in 0 until points.size) {
                 val geoPoint = points[i]
-                val point = mapView!!.projection.toPixels(geoPoint, null)
+                val point = mapView.projection.toPixels(geoPoint, null)
                 val x = point.x.toFloat()
                 val y = point.y.toFloat()
 
@@ -1231,6 +1347,14 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             }
             canvas.drawPath(path, paint)
         }
+    }
+
+    fun isInternetAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
 }

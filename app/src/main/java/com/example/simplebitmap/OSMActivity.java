@@ -75,7 +75,7 @@ public class OSMActivity extends AppCompatActivity {
         drawTriangleButton = findViewById(R.id.drawTriangleButton);
 
         map = findViewById(R.id.mapview);
-        map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setTileSource(TileSourceFactory.HIKEBIKEMAP);
         map.getController().setZoom(15.0);
         map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
         map.setMultiTouchControls(true);
