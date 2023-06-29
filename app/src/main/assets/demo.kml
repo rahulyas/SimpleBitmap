@@ -1,0 +1,1106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="demo_pointData_2023_06_28_17_09_55_858" id="demo_pointData_2023_06_28_17_09_55_858">
+	<SimpleField name="Point_name" type="string"></SimpleField>
+	<SimpleField name="Easting" type="float"></SimpleField>
+	<SimpleField name="Northing" type="float"></SimpleField>
+	<SimpleField name="Elevation" type="float"></SimpleField>
+	<SimpleField name="Point Code" type="string"></SimpleField>
+	<SimpleField name="Date" type="string"></SimpleField>
+	<SimpleField name="Time" type="string"></SimpleField>
+	<SimpleField name="Antenna Height" type="int"></SimpleField>
+	<SimpleField name="Record Type" type="string"></SimpleField>
+	<SimpleField name="Precision Type" type="string"></SimpleField>
+	<SimpleField name="Latitude" type="float"></SimpleField>
+	<SimpleField name="Longitude" type="float"></SimpleField>
+	<SimpleField name="SigmaX" type="string"></SimpleField>
+	<SimpleField name="SigmaY" type="string"></SimpleField>
+	<SimpleField name="SigmaZ" type="string"></SimpleField>
+	<SimpleField name="PDOP" type="float"></SimpleField>
+	<SimpleField name="HDOP" type="float"></SimpleField>
+	<SimpleField name="VDOP" type="float"></SimpleField>
+	<SimpleField name="TDOP" type="float"></SimpleField>
+	<SimpleField name="GDOP" type="string"></SimpleField>
+	<SimpleField name="Zone" type="int"></SimpleField>
+	<SimpleField name="SurveyType" type="string"></SimpleField>
+	<SimpleField name="Prefix" type="string"></SimpleField>
+	<SimpleField name="Misc1" type="string"></SimpleField>
+	<SimpleField name="Misc2" type="int"></SimpleField>
+</Schema>
+<Folder><name>demo_pointData_2023_06_28_17_09_55_858</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_1</SimpleData>
+		<SimpleData name="Easting">732753.1588</SimpleData>
+		<SimpleData name="Northing">3168155.923</SimpleData>
+		<SimpleData name="Elevation">155.179</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:168</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61957468</SimpleData>
+		<SimpleData name="Longitude">77.38062544</SimpleData>
+		<SimpleData name="SigmaX">7 mm</SimpleData>
+		<SimpleData name="SigmaY">188 mm</SimpleData>
+		<SimpleData name="SigmaZ">2011 mm</SimpleData>
+		<SimpleData name="PDOP">1.001</SimpleData>
+		<SimpleData name="HDOP">0.567</SimpleData>
+		<SimpleData name="VDOP">0.596</SimpleData>
+		<SimpleData name="TDOP">1.166</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln1_st</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806254429367,28.6195746808677</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_2</SimpleData>
+		<SimpleData name="Easting">732753.5554</SimpleData>
+		<SimpleData name="Northing">3168156.013</SimpleData>
+		<SimpleData name="Elevation">155.5665</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:172</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61957542</SimpleData>
+		<SimpleData name="Longitude">77.38062952</SimpleData>
+		<SimpleData name="SigmaX">15 mm</SimpleData>
+		<SimpleData name="SigmaY">189 mm</SimpleData>
+		<SimpleData name="SigmaZ">2021 mm</SimpleData>
+		<SimpleData name="PDOP">1.007</SimpleData>
+		<SimpleData name="HDOP">0.572</SimpleData>
+		<SimpleData name="VDOP">0.597</SimpleData>
+		<SimpleData name="TDOP">1.171</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln1_en</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806295148448,28.6195754213198</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_3</SimpleData>
+		<SimpleData name="Easting">732753.4967</SimpleData>
+		<SimpleData name="Northing">3168154.482</SimpleData>
+		<SimpleData name="Elevation">152.4927</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:175</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956162</SimpleData>
+		<SimpleData name="Longitude">77.3806286</SimpleData>
+		<SimpleData name="SigmaX">2 mm</SimpleData>
+		<SimpleData name="SigmaY">187 mm</SimpleData>
+		<SimpleData name="SigmaZ">2085 mm</SimpleData>
+		<SimpleData name="PDOP">1.033</SimpleData>
+		<SimpleData name="HDOP">0.572</SimpleData>
+		<SimpleData name="VDOP">0.607</SimpleData>
+		<SimpleData name="TDOP">1.198</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln2_st</SimpleData>
+		<SimpleData name="Misc1">#FF8A02FF</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806286032701,28.6195616242993</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_4</SimpleData>
+		<SimpleData name="Easting">732753.5999</SimpleData>
+		<SimpleData name="Northing">3168155.018</SimpleData>
+		<SimpleData name="Elevation">153.8289</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:176</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956644</SimpleData>
+		<SimpleData name="Longitude">77.38062977</SimpleData>
+		<SimpleData name="SigmaX">2 mm</SimpleData>
+		<SimpleData name="SigmaY">187 mm</SimpleData>
+		<SimpleData name="SigmaZ">2085 mm</SimpleData>
+		<SimpleData name="PDOP">1.033</SimpleData>
+		<SimpleData name="HDOP">0.572</SimpleData>
+		<SimpleData name="VDOP">0.607</SimpleData>
+		<SimpleData name="TDOP">1.198</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln2_en</SimpleData>
+		<SimpleData name="Misc1">#FF8A02FF</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806297671562,28.6195664397649</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_5</SimpleData>
+		<SimpleData name="Easting">732753.8587</SimpleData>
+		<SimpleData name="Northing">3168155.653</SimpleData>
+		<SimpleData name="Elevation">155.0007</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:178</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61957212</SimpleData>
+		<SimpleData name="Longitude">77.38063254</SimpleData>
+		<SimpleData name="SigmaX">1 mm</SimpleData>
+		<SimpleData name="SigmaY">187 mm</SimpleData>
+		<SimpleData name="SigmaZ">2084 mm</SimpleData>
+		<SimpleData name="PDOP">1.033</SimpleData>
+		<SimpleData name="HDOP">0.572</SimpleData>
+		<SimpleData name="VDOP">0.607</SimpleData>
+		<SimpleData name="TDOP">1.198</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln3_st</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806325415569,28.6195721201326</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_6</SimpleData>
+		<SimpleData name="Easting">732753.9003</SimpleData>
+		<SimpleData name="Northing">3168155.103</SimpleData>
+		<SimpleData name="Elevation">154.6276</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:181</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956715</SimpleData>
+		<SimpleData name="Longitude">77.38063286</SimpleData>
+		<SimpleData name="SigmaX">1 mm</SimpleData>
+		<SimpleData name="SigmaY">187 mm</SimpleData>
+		<SimpleData name="SigmaZ">2084 mm</SimpleData>
+		<SimpleData name="PDOP">1.032</SimpleData>
+		<SimpleData name="HDOP">0.572</SimpleData>
+		<SimpleData name="VDOP">0.606</SimpleData>
+		<SimpleData name="TDOP">1.197</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln3_en</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806328548004,28.6195671524006</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_7</SimpleData>
+		<SimpleData name="Easting">732754.5696</SimpleData>
+		<SimpleData name="Northing">3168154.28</SimpleData>
+		<SimpleData name="Elevation">154.3947</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:183</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955961</SimpleData>
+		<SimpleData name="Longitude">77.38063953</SimpleData>
+		<SimpleData name="SigmaX">1 mm</SimpleData>
+		<SimpleData name="SigmaY">187 mm</SimpleData>
+		<SimpleData name="SigmaZ">2083 mm</SimpleData>
+		<SimpleData name="PDOP">1.032</SimpleData>
+		<SimpleData name="HDOP">0.572</SimpleData>
+		<SimpleData name="VDOP">0.606</SimpleData>
+		<SimpleData name="TDOP">1.197</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln4_st</SimpleData>
+		<SimpleData name="Misc1">#FFFFE617</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.380639528107,28.6195596098439</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_8</SimpleData>
+		<SimpleData name="Easting">732754.6216</SimpleData>
+		<SimpleData name="Northing">3168154.414</SimpleData>
+		<SimpleData name="Elevation">154.4594</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:185</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956081</SimpleData>
+		<SimpleData name="Longitude">77.38064009</SimpleData>
+		<SimpleData name="SigmaX">1 mm</SimpleData>
+		<SimpleData name="SigmaY">187 mm</SimpleData>
+		<SimpleData name="SigmaZ">2083 mm</SimpleData>
+		<SimpleData name="PDOP">1.032</SimpleData>
+		<SimpleData name="HDOP">0.572</SimpleData>
+		<SimpleData name="VDOP">0.606</SimpleData>
+		<SimpleData name="TDOP">1.197</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln4_en</SimpleData>
+		<SimpleData name="Misc1">#FFFFE617</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806400868649,28.6195608090049</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_9</SimpleData>
+		<SimpleData name="Easting">732754.5736</SimpleData>
+		<SimpleData name="Northing">3168153.117</SimpleData>
+		<SimpleData name="Elevation">153.4515</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:188</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61954912</SimpleData>
+		<SimpleData name="Longitude">77.38063933</SimpleData>
+		<SimpleData name="SigmaX">36 mm</SimpleData>
+		<SimpleData name="SigmaY">196 mm</SimpleData>
+		<SimpleData name="SigmaZ">2127 mm</SimpleData>
+		<SimpleData name="PDOP">1.052</SimpleData>
+		<SimpleData name="HDOP">0.602</SimpleData>
+		<SimpleData name="VDOP">0.616</SimpleData>
+		<SimpleData name="TDOP">1.219</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln5_st</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806393322793,28.6195491204284</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_10</SimpleData>
+		<SimpleData name="Easting">732753.9273</SimpleData>
+		<SimpleData name="Northing">3168154.14</SimpleData>
+		<SimpleData name="Elevation">154.0357</SimpleData>
+		<SimpleData name="Point Code">line</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:191</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955846</SimpleData>
+		<SimpleData name="Longitude">77.38063294</SimpleData>
+		<SimpleData name="SigmaX">52 mm</SimpleData>
+		<SimpleData name="SigmaY">200 mm</SimpleData>
+		<SimpleData name="SigmaZ">2172 mm</SimpleData>
+		<SimpleData name="PDOP">1.074</SimpleData>
+		<SimpleData name="HDOP">0.624</SimpleData>
+		<SimpleData name="VDOP">0.62</SimpleData>
+		<SimpleData name="TDOP">1.24</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">line</SimpleData>
+		<SimpleData name="Prefix">Ln5_en</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806329347597,28.6195584625856</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_11</SimpleData>
+		<SimpleData name="Easting">732753.9238</SimpleData>
+		<SimpleData name="Northing">3168156.029</SimpleData>
+		<SimpleData name="Elevation">153.8516</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:193</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.6195755</SimpleData>
+		<SimpleData name="Longitude">77.38063328</SimpleData>
+		<SimpleData name="SigmaX">13 mm</SimpleData>
+		<SimpleData name="SigmaY">190 mm</SimpleData>
+		<SimpleData name="SigmaZ">2017 mm</SimpleData>
+		<SimpleData name="PDOP">1.006</SimpleData>
+		<SimpleData name="HDOP">0.572</SimpleData>
+		<SimpleData name="VDOP">0.595</SimpleData>
+		<SimpleData name="TDOP">1.168</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl1_1</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806332834633,28.6195754994558</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_12</SimpleData>
+		<SimpleData name="Easting">732752.9991</SimpleData>
+		<SimpleData name="Northing">3168155.189</SimpleData>
+		<SimpleData name="Elevation">152.2471</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:196</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956809</SimpleData>
+		<SimpleData name="Longitude">77.38062366</SimpleData>
+		<SimpleData name="SigmaX">50 mm</SimpleData>
+		<SimpleData name="SigmaY">202 mm</SimpleData>
+		<SimpleData name="SigmaZ">2086 mm</SimpleData>
+		<SimpleData name="PDOP">1.036</SimpleData>
+		<SimpleData name="HDOP">0.616</SimpleData>
+		<SimpleData name="VDOP">0.607</SimpleData>
+		<SimpleData name="TDOP">1.2</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl1_2</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806236612728,28.6195680898551</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_13</SimpleData>
+		<SimpleData name="Easting">732753.625</SimpleData>
+		<SimpleData name="Northing">3168154.862</SimpleData>
+		<SimpleData name="Elevation">152.9625</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:198</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956503</SimpleData>
+		<SimpleData name="Longitude">77.38062999</SimpleData>
+		<SimpleData name="SigmaX">50 mm</SimpleData>
+		<SimpleData name="SigmaY">202 mm</SimpleData>
+		<SimpleData name="SigmaZ">2086 mm</SimpleData>
+		<SimpleData name="PDOP">1.035</SimpleData>
+		<SimpleData name="HDOP">0.616</SimpleData>
+		<SimpleData name="VDOP">0.607</SimpleData>
+		<SimpleData name="TDOP">1.2</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl1_3</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806299919482,28.6195650283467</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_14</SimpleData>
+		<SimpleData name="Easting">732753.6393</SimpleData>
+		<SimpleData name="Northing">3168154.649</SimpleData>
+		<SimpleData name="Elevation">153.0072</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:201</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.6195631</SimpleData>
+		<SimpleData name="Longitude">77.3806301</SimpleData>
+		<SimpleData name="SigmaX">50 mm</SimpleData>
+		<SimpleData name="SigmaY">202 mm</SimpleData>
+		<SimpleData name="SigmaZ">2085 mm</SimpleData>
+		<SimpleData name="PDOP">1.035</SimpleData>
+		<SimpleData name="HDOP">0.616</SimpleData>
+		<SimpleData name="VDOP">0.607</SimpleData>
+		<SimpleData name="TDOP">1.2</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl1_4</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806300947536,28.6195631048048</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_15</SimpleData>
+		<SimpleData name="Easting">732753.5108</SimpleData>
+		<SimpleData name="Northing">3168155.683</SimpleData>
+		<SimpleData name="Elevation">153.741</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:203</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61957246</SimpleData>
+		<SimpleData name="Longitude">77.38062899</SimpleData>
+		<SimpleData name="SigmaX">57 mm</SimpleData>
+		<SimpleData name="SigmaY">209 mm</SimpleData>
+		<SimpleData name="SigmaZ">2097 mm</SimpleData>
+		<SimpleData name="PDOP">1.044</SimpleData>
+		<SimpleData name="HDOP">0.62</SimpleData>
+		<SimpleData name="VDOP">0.607</SimpleData>
+		<SimpleData name="TDOP">1.207</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl1_5</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806289918285,28.6195724531731</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_16</SimpleData>
+		<SimpleData name="Easting">732754.0712</SimpleData>
+		<SimpleData name="Northing">3168154.663</SimpleData>
+		<SimpleData name="Elevation">154.5742</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:205</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956316</SimpleData>
+		<SimpleData name="Longitude">77.38063451</SimpleData>
+		<SimpleData name="SigmaX">118 mm</SimpleData>
+		<SimpleData name="SigmaY">210 mm</SimpleData>
+		<SimpleData name="SigmaZ">2192 mm</SimpleData>
+		<SimpleData name="PDOP">1.073</SimpleData>
+		<SimpleData name="HDOP">0.628</SimpleData>
+		<SimpleData name="VDOP">0.633</SimpleData>
+		<SimpleData name="TDOP">1.246</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl2_1</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806345119887,28.6195631534992</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_17</SimpleData>
+		<SimpleData name="Easting">732753.8881</SimpleData>
+		<SimpleData name="Northing">3168154.275</SimpleData>
+		<SimpleData name="Elevation">154.7306</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:209</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955969</SimpleData>
+		<SimpleData name="Longitude">77.38063256</SimpleData>
+		<SimpleData name="SigmaX">120 mm</SimpleData>
+		<SimpleData name="SigmaY">205 mm</SimpleData>
+		<SimpleData name="SigmaZ">2233 mm</SimpleData>
+		<SimpleData name="PDOP">1.078</SimpleData>
+		<SimpleData name="HDOP">0.617</SimpleData>
+		<SimpleData name="VDOP">0.637</SimpleData>
+		<SimpleData name="TDOP">1.253</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl2_2</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806325615795,28.6195596871443</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_18</SimpleData>
+		<SimpleData name="Easting">732754.3268</SimpleData>
+		<SimpleData name="Northing">3168154.135</SimpleData>
+		<SimpleData name="Elevation">155.6189</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:213</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955835</SimpleData>
+		<SimpleData name="Longitude">77.38063702</SimpleData>
+		<SimpleData name="SigmaX">100 mm</SimpleData>
+		<SimpleData name="SigmaY">210 mm</SimpleData>
+		<SimpleData name="SigmaZ">2655 mm</SimpleData>
+		<SimpleData name="PDOP">1.284</SimpleData>
+		<SimpleData name="HDOP">0.704</SimpleData>
+		<SimpleData name="VDOP">0.831</SimpleData>
+		<SimpleData name="TDOP">1.53</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl2_3</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806370169719,28.6195583457443</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_19</SimpleData>
+		<SimpleData name="Easting">732754.2087</SimpleData>
+		<SimpleData name="Northing">3168154.396</SimpleData>
+		<SimpleData name="Elevation">159.0931</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:216</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956073</SimpleData>
+		<SimpleData name="Longitude">77.38063586</SimpleData>
+		<SimpleData name="SigmaX">10 mm</SimpleData>
+		<SimpleData name="SigmaY">216 mm</SimpleData>
+		<SimpleData name="SigmaZ">2561 mm</SimpleData>
+		<SimpleData name="PDOP">1.259</SimpleData>
+		<SimpleData name="HDOP">0.709</SimpleData>
+		<SimpleData name="VDOP">0.815</SimpleData>
+		<SimpleData name="TDOP">1.5</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl2_4</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.380635863012,28.6195607208237</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_20</SimpleData>
+		<SimpleData name="Easting">732754.558</SimpleData>
+		<SimpleData name="Northing">3168153.83</SimpleData>
+		<SimpleData name="Elevation">158.6002</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:219</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955556</SimpleData>
+		<SimpleData name="Longitude">77.38063932</SimpleData>
+		<SimpleData name="SigmaX">63 mm</SimpleData>
+		<SimpleData name="SigmaY">197 mm</SimpleData>
+		<SimpleData name="SigmaZ">2156 mm</SimpleData>
+		<SimpleData name="PDOP">1.061</SimpleData>
+		<SimpleData name="HDOP">0.629</SimpleData>
+		<SimpleData name="VDOP">0.617</SimpleData>
+		<SimpleData name="TDOP">1.227</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl3_1</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806393179544,28.6195555535319</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_21</SimpleData>
+		<SimpleData name="Easting">732754.703</SimpleData>
+		<SimpleData name="Northing">3168154.631</SimpleData>
+		<SimpleData name="Elevation">160.1787</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:222</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61956276</SimpleData>
+		<SimpleData name="Longitude">77.38064096</SimpleData>
+		<SimpleData name="SigmaX">8 mm</SimpleData>
+		<SimpleData name="SigmaY">205 mm</SimpleData>
+		<SimpleData name="SigmaZ">2550 mm</SimpleData>
+		<SimpleData name="PDOP">1.253</SimpleData>
+		<SimpleData name="HDOP">0.702</SimpleData>
+		<SimpleData name="VDOP">0.814</SimpleData>
+		<SimpleData name="TDOP">1.494</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl3_2</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806409630093,28.6195627514343</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_22</SimpleData>
+		<SimpleData name="Easting">732754.6968</SimpleData>
+		<SimpleData name="Northing">3168154.108</SimpleData>
+		<SimpleData name="Elevation">160.0457</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:225</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955804</SimpleData>
+		<SimpleData name="Longitude">77.38064079</SimpleData>
+		<SimpleData name="SigmaX">7 mm</SimpleData>
+		<SimpleData name="SigmaY">205 mm</SimpleData>
+		<SimpleData name="SigmaZ">2549 mm</SimpleData>
+		<SimpleData name="PDOP">1.252</SimpleData>
+		<SimpleData name="HDOP">0.702</SimpleData>
+		<SimpleData name="VDOP">0.814</SimpleData>
+		<SimpleData name="TDOP">1.494</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl3_3</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806407931912,28.6195580357906</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_23</SimpleData>
+		<SimpleData name="Easting">732754.8043</SimpleData>
+		<SimpleData name="Northing">3168154.082</SimpleData>
+		<SimpleData name="Elevation">160.7037</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:229</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955778</SimpleData>
+		<SimpleData name="Longitude">77.38064189</SimpleData>
+		<SimpleData name="SigmaX">2 mm</SimpleData>
+		<SimpleData name="SigmaY">199 mm</SimpleData>
+		<SimpleData name="SigmaZ">2600 mm</SimpleData>
+		<SimpleData name="PDOP">1.268</SimpleData>
+		<SimpleData name="HDOP">0.725</SimpleData>
+		<SimpleData name="VDOP">0.814</SimpleData>
+		<SimpleData name="TDOP">1.507</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl3_4</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806418866407,28.6195577819991</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_24</SimpleData>
+		<SimpleData name="Easting">732754.8792</SimpleData>
+		<SimpleData name="Northing">3168154.177</SimpleData>
+		<SimpleData name="Elevation">160.5231</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:232</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955862</SimpleData>
+		<SimpleData name="Longitude">77.38064267</SimpleData>
+		<SimpleData name="SigmaX">2 mm</SimpleData>
+		<SimpleData name="SigmaY">199 mm</SimpleData>
+		<SimpleData name="SigmaZ">2600 mm</SimpleData>
+		<SimpleData name="PDOP">1.268</SimpleData>
+		<SimpleData name="HDOP">0.725</SimpleData>
+		<SimpleData name="VDOP">0.814</SimpleData>
+		<SimpleData name="TDOP">1.507</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polyline</SimpleData>
+		<SimpleData name="Prefix">Pl3_5</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806426715182,28.6195586253197</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_25</SimpleData>
+		<SimpleData name="Easting">732754.8671</SimpleData>
+		<SimpleData name="Northing">3168153.613</SimpleData>
+		<SimpleData name="Elevation">160.15</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:235</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955354</SimpleData>
+		<SimpleData name="Longitude">77.38064243</SimpleData>
+		<SimpleData name="SigmaX">2 mm</SimpleData>
+		<SimpleData name="SigmaY">200 mm</SimpleData>
+		<SimpleData name="SigmaZ">2598 mm</SimpleData>
+		<SimpleData name="PDOP">1.268</SimpleData>
+		<SimpleData name="HDOP">0.725</SimpleData>
+		<SimpleData name="VDOP">0.813</SimpleData>
+		<SimpleData name="TDOP">1.506</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg1_1</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806424330521,28.6195535409708</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_26</SimpleData>
+		<SimpleData name="Easting">732753.1188</SimpleData>
+		<SimpleData name="Northing">3168151.825</SimpleData>
+		<SimpleData name="Elevation">155.6571</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:238</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61953773</SimpleData>
+		<SimpleData name="Longitude">77.3806242</SimpleData>
+		<SimpleData name="SigmaX">2 mm</SimpleData>
+		<SimpleData name="SigmaY">196 mm</SimpleData>
+		<SimpleData name="SigmaZ">2547 mm</SimpleData>
+		<SimpleData name="PDOP">1.265</SimpleData>
+		<SimpleData name="HDOP">0.724</SimpleData>
+		<SimpleData name="VDOP">0.811</SimpleData>
+		<SimpleData name="TDOP">1.503</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg1_2</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806242000218,28.619537729598</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_27</SimpleData>
+		<SimpleData name="Easting">732753.9834</SimpleData>
+		<SimpleData name="Northing">3168151.715</SimpleData>
+		<SimpleData name="Elevation">157.7651</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:241</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61953658</SimpleData>
+		<SimpleData name="Longitude">77.38063302</SimpleData>
+		<SimpleData name="SigmaX">2 mm</SimpleData>
+		<SimpleData name="SigmaY">196 mm</SimpleData>
+		<SimpleData name="SigmaZ">2546 mm</SimpleData>
+		<SimpleData name="PDOP">1.265</SimpleData>
+		<SimpleData name="HDOP">0.724</SimpleData>
+		<SimpleData name="VDOP">0.811</SimpleData>
+		<SimpleData name="TDOP">1.502</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg1_3</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806330145788,28.619536582269</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_28</SimpleData>
+		<SimpleData name="Easting">732753.5943</SimpleData>
+		<SimpleData name="Northing">3168151.925</SimpleData>
+		<SimpleData name="Elevation">157.3106</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:244</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61953855</SimpleData>
+		<SimpleData name="Longitude">77.38062908</SimpleData>
+		<SimpleData name="SigmaX">12 mm</SimpleData>
+		<SimpleData name="SigmaY">196 mm</SimpleData>
+		<SimpleData name="SigmaZ">2526 mm</SimpleData>
+		<SimpleData name="PDOP">1.252</SimpleData>
+		<SimpleData name="HDOP">0.717</SimpleData>
+		<SimpleData name="VDOP">0.806</SimpleData>
+		<SimpleData name="TDOP">1.489</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg1_4</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806290803887,28.6195385460668</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_29</SimpleData>
+		<SimpleData name="Easting">732754.8522</SimpleData>
+		<SimpleData name="Northing">3168151.465</SimpleData>
+		<SimpleData name="Elevation">159.3854</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:248</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61953417</SimpleData>
+		<SimpleData name="Longitude">77.38064184</SimpleData>
+		<SimpleData name="SigmaX">1 mm</SimpleData>
+		<SimpleData name="SigmaY">196 mm</SimpleData>
+		<SimpleData name="SigmaZ">2545 mm</SimpleData>
+		<SimpleData name="PDOP">1.264</SimpleData>
+		<SimpleData name="HDOP">0.723</SimpleData>
+		<SimpleData name="VDOP">0.81</SimpleData>
+		<SimpleData name="TDOP">1.502</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg1_5</SimpleData>
+		<SimpleData name="Misc1">#FFFF04FB</SimpleData>
+		<SimpleData name="Misc2">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806418435682,28.6195341715732</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_30</SimpleData>
+		<SimpleData name="Easting">732754.6378</SimpleData>
+		<SimpleData name="Northing">3168151.354</SimpleData>
+		<SimpleData name="Elevation">159.0487</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:251</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61953321</SimpleData>
+		<SimpleData name="Longitude">77.38063963</SimpleData>
+		<SimpleData name="SigmaX">12 mm</SimpleData>
+		<SimpleData name="SigmaY">197 mm</SimpleData>
+		<SimpleData name="SigmaZ">2524 mm</SimpleData>
+		<SimpleData name="PDOP">1.251</SimpleData>
+		<SimpleData name="HDOP">0.717</SimpleData>
+		<SimpleData name="VDOP">0.806</SimpleData>
+		<SimpleData name="TDOP">1.488</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg2_1</SimpleData>
+		<SimpleData name="Misc1">#FFFFE617</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.380639629626,28.6195332090075</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_31</SimpleData>
+		<SimpleData name="Easting">732755.5208</SimpleData>
+		<SimpleData name="Northing">3168151.593</SimpleData>
+		<SimpleData name="Elevation">160.8973</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:254</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.6195352</SimpleData>
+		<SimpleData name="Longitude">77.3806487</SimpleData>
+		<SimpleData name="SigmaX">12 mm</SimpleData>
+		<SimpleData name="SigmaY">197 mm</SimpleData>
+		<SimpleData name="SigmaZ">2523 mm</SimpleData>
+		<SimpleData name="PDOP">1.25</SimpleData>
+		<SimpleData name="HDOP">0.717</SimpleData>
+		<SimpleData name="VDOP">0.805</SimpleData>
+		<SimpleData name="TDOP">1.487</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg2_2</SimpleData>
+		<SimpleData name="Misc1">#FFFFE617</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806487032799,28.619535205884</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_32</SimpleData>
+		<SimpleData name="Easting">732754.8774</SimpleData>
+		<SimpleData name="Northing">3168151.556</SimpleData>
+		<SimpleData name="Elevation">159.5281</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:257</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61953499</SimpleData>
+		<SimpleData name="Longitude">77.38064212</SimpleData>
+		<SimpleData name="SigmaX">12 mm</SimpleData>
+		<SimpleData name="SigmaY">197 mm</SimpleData>
+		<SimpleData name="SigmaZ">2522 mm</SimpleData>
+		<SimpleData name="PDOP">1.25</SimpleData>
+		<SimpleData name="HDOP">0.717</SimpleData>
+		<SimpleData name="VDOP">0.805</SimpleData>
+		<SimpleData name="TDOP">1.487</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg2_3</SimpleData>
+		<SimpleData name="Misc1">#FFFFE617</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806421196553,28.6195349877452</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_33</SimpleData>
+		<SimpleData name="Easting">732754.5518</SimpleData>
+		<SimpleData name="Northing">3168153.363</SimpleData>
+		<SimpleData name="Elevation">160.4976</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:260</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955135</SimpleData>
+		<SimpleData name="Longitude">77.38063916</SimpleData>
+		<SimpleData name="SigmaX">37 mm</SimpleData>
+		<SimpleData name="SigmaY">202 mm</SimpleData>
+		<SimpleData name="SigmaZ">2121 mm</SimpleData>
+		<SimpleData name="PDOP">1.05</SimpleData>
+		<SimpleData name="HDOP">0.644</SimpleData>
+		<SimpleData name="VDOP">0.606</SimpleData>
+		<SimpleData name="TDOP">1.213</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">polygon</SimpleData>
+		<SimpleData name="Prefix">Pg2_4</SimpleData>
+		<SimpleData name="Misc1">#FFFFE617</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806391595344,28.619551342933</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_34</SimpleData>
+		<SimpleData name="Easting">732754.8255</SimpleData>
+		<SimpleData name="Northing">3168152.561</SimpleData>
+		<SimpleData name="Elevation">157.6037</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:263</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61954406</SimpleData>
+		<SimpleData name="Longitude">77.38064179</SimpleData>
+		<SimpleData name="SigmaX">40 mm</SimpleData>
+		<SimpleData name="SigmaY">202 mm</SimpleData>
+		<SimpleData name="SigmaZ">2093 mm</SimpleData>
+		<SimpleData name="PDOP">1.038</SimpleData>
+		<SimpleData name="HDOP">0.626</SimpleData>
+		<SimpleData name="VDOP">0.6</SimpleData>
+		<SimpleData name="TDOP">1.199</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">circle</SimpleData>
+		<SimpleData name="Prefix">1Cr1_c</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806417937459,28.6195440608156</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_35</SimpleData>
+		<SimpleData name="Easting">732754.7146</SimpleData>
+		<SimpleData name="Northing">3168152.996</SimpleData>
+		<SimpleData name="Elevation">157.3028</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:266</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61954801</SimpleData>
+		<SimpleData name="Longitude">77.38064075</SimpleData>
+		<SimpleData name="SigmaX">39 mm</SimpleData>
+		<SimpleData name="SigmaY">202 mm</SimpleData>
+		<SimpleData name="SigmaZ">2093 mm</SimpleData>
+		<SimpleData name="PDOP">1.038</SimpleData>
+		<SimpleData name="HDOP">0.626</SimpleData>
+		<SimpleData name="VDOP">0.6</SimpleData>
+		<SimpleData name="TDOP">1.198</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">circle</SimpleData>
+		<SimpleData name="Prefix">1Cr1_r</SimpleData>
+		<SimpleData name="Misc1">#FFFF9513</SimpleData>
+		<SimpleData name="Misc2">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806407487914,28.6195480038481</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_36</SimpleData>
+		<SimpleData name="Easting">732754.7801</SimpleData>
+		<SimpleData name="Northing">3168153.261</SimpleData>
+		<SimpleData name="Elevation">157.145</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:270</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955038</SimpleData>
+		<SimpleData name="Longitude">77.38064147</SimpleData>
+		<SimpleData name="SigmaX">39 mm</SimpleData>
+		<SimpleData name="SigmaY">202 mm</SimpleData>
+		<SimpleData name="SigmaZ">2092 mm</SimpleData>
+		<SimpleData name="PDOP">1.037</SimpleData>
+		<SimpleData name="HDOP">0.626</SimpleData>
+		<SimpleData name="VDOP">0.6</SimpleData>
+		<SimpleData name="TDOP">1.198</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">circle</SimpleData>
+		<SimpleData name="Prefix">1Cr2_c</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806414721938,28.6195503820285</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#demo_pointData_2023_06_28_17_09_55_858">
+		<SimpleData name="Point_name">cosv-Pt_37</SimpleData>
+		<SimpleData name="Easting">732754.5249</SimpleData>
+		<SimpleData name="Northing">3168154.223</SimpleData>
+		<SimpleData name="Elevation">156.426</SimpleData>
+		<SimpleData name="Point Code">polyline</SimpleData>
+		<SimpleData name="Date">28-06-2023</SimpleData>
+		<SimpleData name="Time">17:4:22:273</SimpleData>
+		<SimpleData name="Antenna Height">0</SimpleData>
+		<SimpleData name="Record Type">Topo Survey</SimpleData>
+		<SimpleData name="Precision Type">Standalone mode</SimpleData>
+		<SimpleData name="Latitude">28.61955911</SimpleData>
+		<SimpleData name="Longitude">77.38063906</SimpleData>
+		<SimpleData name="SigmaX">44 mm</SimpleData>
+		<SimpleData name="SigmaY">202 mm</SimpleData>
+		<SimpleData name="SigmaZ">2111 mm</SimpleData>
+		<SimpleData name="PDOP">1.051</SimpleData>
+		<SimpleData name="HDOP">0.643</SimpleData>
+		<SimpleData name="VDOP">0.61</SimpleData>
+		<SimpleData name="TDOP">1.215</SimpleData>
+		<SimpleData name="Zone">43</SimpleData>
+		<SimpleData name="SurveyType">circle</SimpleData>
+		<SimpleData name="Prefix">1Cr2_r</SimpleData>
+		<SimpleData name="Misc1">#FF3BE63C</SimpleData>
+		<SimpleData name="Misc2">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3806390596335,28.6195591038084</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

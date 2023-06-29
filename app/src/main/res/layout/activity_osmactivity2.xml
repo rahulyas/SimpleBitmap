@@ -26,12 +26,30 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/select_polygon_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:text="SP" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/resetZoomButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:visibility="gone"
             android:hint="RZ"
+            android:textColorHint="@color/black"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/redraw"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:hint="D"
             android:textColorHint="@color/black"/>
 
 

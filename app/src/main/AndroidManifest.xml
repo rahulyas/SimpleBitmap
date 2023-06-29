@@ -99,7 +99,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".NavigationDrawerActivity"
+            android:name=".OSMActivity2"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -112,7 +112,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".OSMActivity2"
+            android:name=".NavigationDrawerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

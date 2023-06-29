@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.AssetManager
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -17,6 +19,7 @@ import android.os.Environment
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -24,14 +27,16 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.simplebitmap.databinding.ActivityOsmactivity2Binding
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.osmdroid.api.IGeoPoint
+import org.osmdroid.bonuspack.kml.KmlDocument
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
-import org.osmdroid.views.Projection
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Overlay
@@ -41,9 +46,11 @@ import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.simplefastpoint.LabelledGeoPoint
 import java.io.BufferedReader
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.FileReader
 import java.io.IOException
+import java.io.InputStreamReader
 import java.lang.Math.atan2
 import java.lang.Math.cos
 import java.lang.Math.sin
@@ -53,6 +60,7 @@ import java.math.RoundingMode
 import java.util.Arrays
 import java.util.Scanner
 import kotlin.math.pow
+
 
 class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
     private lateinit var binding: ActivityOsmactivity2Binding
@@ -96,7 +104,17 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
     var polyline_map = HashMap<String, ArrayList<ArrayList<String>>>()
     var polygon_map = HashMap<String, ArrayList<ArrayList<String>>>()
     var Newlwpolyline_map = HashMap<String, MutableList<GeoPoint>>()
+    var Newpolygon_map = HashMap<String, MutableList<GeoPoint>>()
+    var Newline_map = HashMap<String, MutableList<GeoPoint>>()
+    var Newcircle_map = HashMap<String, HashMap<ArrayList<String>,MutableList<GeoPoint>>>()
     var XmltrianglePoint_map = HashMap<String, MutableList<GeoPoint>>()
+
+    /*29-06-2023*/
+    private var isDrawingPolygon: Boolean = false
+    private var currentPolygonPoints: MutableList<GeoPoint> = mutableListOf()
+
+
+    lateinit var sharedpreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOsmactivity2Binding.inflate(layoutInflater)
@@ -113,10 +131,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         )
         val context: Context = applicationContext
         val isAvailable = isInternetAvailable(context)
-
-
-
-
+        sharedpreferences = getSharedPreferences(Constants.MYPreference, MODE_PRIVATE)
         map = findViewById(R.id.mapview)
         map.setTileSource(TileSourceFactory.MAPNIK)
 //        map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE)
@@ -164,6 +179,8 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
                 binding.triangle.setVisibility(View.VISIBLE)
                 binding.line.setVisibility(View.VISIBLE)
                 binding.resetZoomButton.setVisibility(View.VISIBLE)
+                binding.redraw.setVisibility(View.VISIBLE)
+                binding.selectPolygonButton.setVisibility(View.VISIBLE)
                 binding.addFab.extend()
                 true
             } else {
@@ -172,6 +189,8 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
                 binding.triangle.setVisibility(View.GONE)
                 binding.line.setVisibility(View.GONE)
                 binding.resetZoomButton.setVisibility(View.GONE)
+                binding.redraw.setVisibility(View.GONE)
+                binding.selectPolygonButton.setVisibility(View.GONE)
                 binding.addFab.shrink()
                 false
             }
@@ -194,6 +213,25 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         binding.resetZoomButton.setOnClickListener {
             map.controller.setZoom(15.0)
         }
+        val gson = Gson()
+        val json1: String = sharedpreferences.getString(Constants.Newlwpolyline_map, "").toString()
+        val type = object : TypeToken<HashMap<String, MutableList<GeoPoint>>>() {}.getType()
+        val mySet1: HashMap<String, MutableList<GeoPoint>> = gson.fromJson(json1, type)
+        Newlwpolyline_map = mySet1
+        binding.redraw.setOnClickListener {
+            Newlwpolyline_map.forEach{(key, value) ->
+                val key = key
+                val value = value
+                val paint = Paint()
+                paint.color = Color.GREEN
+                paint.style = Paint.Style.STROKE
+                paint.strokeWidth = 4f
+                for(l in value.indices) {
+                    map.overlays.add(drawlwpolyline(value,paint))
+                    map.controller.setCenter(value[l])
+                }
+            }
+        }
 ////////////////////////////////////////////////////////////////////
         // Set the center of the map or current location
         val startPoint = GeoPoint(28.619558, 77.380608) // Start point coordinates
@@ -209,14 +247,23 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         map.overlays.add(0, mapEventsOverlay)
 ////////////////////////////////////////////////////////////////////////
     /*for example i want to calculate the distance between two Geopoints points*/
-        val geoPoint1 = GeoPoint(40.7128, -74.0060)
+/*        val geoPoint1 = GeoPoint(40.7128, -74.0060)
         val geoPoint2 = GeoPoint(34.0522, -118.2437)
 
         val distance: Double = geoPoint1.distanceToAsDouble(geoPoint2)
         val newdistance = map.getProjection().metersToPixels(distance.toFloat());
 
-        println("Distance: $distance meters====== $newdistance")
-
+        println("Distance: $distance meters====== $newdistance")*/
+        /*29-06-2023*/
+        binding.selectPolygonButton.setOnClickListener {
+            isDrawingPolygon = !isDrawingPolygon
+            if (isDrawingPolygon) {
+                binding.selectPolygonButton.text = "FD"
+            } else {
+                drawPolygonOnMap()
+                binding. selectPolygonButton.text = "SP"
+            }
+        }
     }
 
     override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
@@ -233,41 +280,9 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             marker.setTitle(p.toString())
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
             map.overlays.add(marker)
-*//*
-            if (p != null) {
-                drawPolyline(p)
-            }*//*
         }
         return false*/
-//////////////////////////////////////////////////////////////////////////////////////
-        /*This is for to draw a circle in osm map where user enter the radius of circle in meters */
-/*        if (p != null) {
-            // Display an AlertDialog to get the radius
-            val editText = EditText(this)
-            val alertDialog = AlertDialog.Builder(this)
-                .setTitle("Enter Radius")
-                .setView(editText)
-                .setPositiveButton("Draw Circle") { dialog, _ ->
-                    val radiusString = editText.text.toString()
-                    val radius = radiusString.toDoubleOrNull()
 
-                    if (radius != null) {
-                        // Draw a circle with the given radius
-                        map.overlays.add(drawCircle(p, Paint(Paint.ANTI_ALIAS_FLAG), radius))
-                    } else {
-                        Toast.makeText(this, "Invalid radius", Toast.LENGTH_SHORT).show()
-                    }
-
-                    dialog.dismiss()
-                }
-                .setNegativeButton("Cancel") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .create()
-
-            alertDialog.show()
-        }
-        return false*/
 //////////////////////////////////////////////////////////////////////////////////////////
         if (p != null) {
             val touchedPoint = p
@@ -299,7 +314,8 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
                         }
                     }
                 }
-            } else if(spilitdatapath.contains("dxf")) {
+            }
+            else if(spilitdatapath.contains("dxf")) {
                 for ((key, value) in Newlwpolyline_map) {
                     val key = key
                     val value = value
@@ -331,12 +347,44 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             }
 
         }
+        /*29-06-2023*/
+        if (isDrawingPolygon && p != null) {
+            currentPolygonPoints.add(p)
+            return true
+        }
 
         return false
     }
 
     override fun longPressHelper(p: GeoPoint?): Boolean {
-        TODO("Not yet implemented")
+        /*This is for to draw a circle in osm map where user enter the radius of circle in meters */
+                if (p != null) {
+                    // Display an AlertDialog to get the radius
+                    val editText = EditText(this)
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setTitle("Enter Radius")
+                        .setView(editText)
+                        .setPositiveButton("Draw Circle") { dialog, _ ->
+                            val radiusString = editText.text.toString()
+                            val radius = radiusString.toDoubleOrNull()
+
+                            if (radius != null) {
+                                // Draw a circle with the given radius
+                                map.overlays.add(drawCircles(p, Paint(Paint.ANTI_ALIAS_FLAG), radius))
+                            } else {
+                                Toast.makeText(this, "Invalid radius", Toast.LENGTH_SHORT).show()
+                            }
+
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("Cancel") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .create()
+
+                    alertDialog.show()
+                }
+                return false
     }
 
     private fun requestPermissionsIfNecessary(permissions: Array<String>) {
@@ -372,8 +420,14 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
                     readCSVFile(getFilePath(fileuri!!))
                 } else if (spilitdata[0].contains("dxf")) {
                     readdxf(getFilePath(fileuri!!))
+                }else if(spilitdata[0].contains("kml")) {
+                   // Load and parse the KML file
+                   val kmlDocument = KmlDocument().apply {
+                        parseKMLStream( FileInputStream(getFilePath(fileuri!!)), null)
+                   }
+                   // Plot the KML features on the map
+                   plotKmlFeatures(kmlDocument)
                 }
-
             }
         }
     }
@@ -543,6 +597,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
     }
 
     fun plotpointonosm(){
+//        val poiIcon = resources.getDrawable(R.drawable.marker_poi_default)
         for (j in geoPoints.indices) {
             val startMarker = Marker(map)
             startMarker.position = geoPoints[j] as GeoPoint
@@ -673,7 +728,6 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         val polyline = Polyline()
         polyline.addPoint(startPoint)
         polyline.addPoint(endPoint)
-
 /*        polyline.getOutlinePaint().setPathEffect(
             DashPathEffect(
                 floatArrayOf(10f, 10f),
@@ -681,7 +735,6 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             )
         )*/ // Set dash pattern for dotted line
         map.overlays.add(polyline)
-
         // Calculate the distance between two points
         val distance = calculateDistance(startPoint, endPoint)
         println("Distance: $distance m")
@@ -749,7 +802,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         map.invalidate()
     }
 
-    class drawCircle(
+    class drawCircles(
         private val geoPoint: GeoPoint,
         private var paint: Paint,
         private val radius: Double
@@ -848,7 +901,6 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             }
         }
     }
-
     fun newface_pointlines() {
         if (newFace_pointline.size > 0) {
             facepoint_inCoordinate.clear()
@@ -866,7 +918,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
                 k = k.replace(" ", "")
                 val k1 = k.toInt()
 
-                val temp_data1 = java.util.ArrayList<Double>()
+                val temp_data1 = ArrayList<Double>()
 
 
                 temp_data1.add(Longitude[i1 - 1])
@@ -883,30 +935,24 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         }
         plotxmlpointonosm()
     }
-
     fun plotxmlpointonosm() {
         Log.d(TAG, "facepoint_inCoordinate: "+facepoint_inCoordinate)
-/*        for (j in geoPoints.indices) {
-            val temp_newList = geoPoints[j]
-            Log.d(TAG, "convertNorthingEastingtoLatitudeLongitude:- ${temp_newList.latitude}, ${temp_newList.longitude}")
-            map.overlays.add(drawpoints(temp_newList,Paint(Paint.ANTI_ALIAS_FLAG)))
-            map.controller.setCenter(geoPoints[j])
-        }*/
+
         for (i in facepoint_inCoordinate.indices) {
-            val temp_ListX = ArrayList<Double>()
-            val temp_ListY = ArrayList<Double>()
+            val temp_ListN = ArrayList<Double>()
+            val temp_ListE = ArrayList<Double>()
             var temp_trianglePoint: MutableList<GeoPoint> = mutableListOf()
             val temp_newList = facepoint_inCoordinate[i]
             for (k in temp_newList.indices) {
                 if (k % 2 == 0) {
-                    temp_ListY.add(temp_newList[k])
+                    temp_ListN.add(temp_newList[k])
                 } else {
-                    temp_ListX.add(temp_newList[k])
+                    temp_ListE.add(temp_newList[k])
                 }
             }
-            Log.d(TAG, "temp_ListX: "+temp_ListX+"\n"+temp_ListY)
-            for(j in temp_ListX.indices) {
-                temp_trianglePoint.add(GeoPoint(temp_ListX[j], temp_ListY[j]))
+            Log.d(TAG, "temp_ListE: "+temp_ListE+"\n"+temp_ListN)
+            for(j in temp_ListE.indices) {
+                temp_trianglePoint.add(GeoPoint(temp_ListE[j], temp_ListN[j]))
             }
             XmltrianglePoint_map.put(i.toString(),temp_trianglePoint)
 /*            val paint = Paint()
@@ -920,6 +966,11 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
 
             Log.d(TAG, "temp_trianglePoint:="+temp_trianglePoint)
         }
+        val gson = Gson()
+        val json1: String = gson.toJson(XmltrianglePoint_map)
+        val editor = sharedpreferences.edit()
+        editor.putString(Constants.XmltrianglePoint_map, json1)
+        editor.apply()
         XmltrianglePoint_map.forEach{(key, value) ->
             val key = key
             val value = value
@@ -933,7 +984,6 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             }
         }
     }
-
     class drawlines(
         private val points: List<GeoPoint>,
         private var paint: Paint,
@@ -970,7 +1020,6 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
 
         }
     }
-
 /* From here dxf file part start*/
     fun readdxf(input: String?): String? {
 
@@ -1268,13 +1317,13 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         println("lwpolyline_map: " + lwpolyline_map.entries)
         println("polyline_map: " + polyline_map.entries)
         println("polygon_map: " + polygon_map.entries)*/
-        println("lwpolyline_map: " + lwpolyline_map.entries)
+//        println("lwpolyline_map: " + lwpolyline_map.entries)
         readlwpolyline_map()
-
+        readcircle_map()
+        readpolygon_map()
+//        readline_map()
     }
-
-    fun readlwpolyline_map()
-    {
+    fun readlwpolyline_map() {
         lwpolyline_map.forEach { (key, value) ->
             val key = key
             val value = value
@@ -1311,6 +1360,11 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             Log.d(TAG, "temp_linePoint: "+temp_linePoint)*/
         }
         Log.d(TAG, "Newlwpolyline_map:="+Newlwpolyline_map)
+        val gson = Gson()
+        val json1: String = gson.toJson(Newlwpolyline_map)
+        val editor = sharedpreferences.edit()
+        editor.putString(Constants.Newlwpolyline_map, json1)
+        editor.apply()
         Newlwpolyline_map.forEach{(key, value) ->
             val key = key
             val value = value
@@ -1325,7 +1379,6 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
         }
 
     }
-
     class drawlwpolyline(
         private val points: List<GeoPoint>,
         private var paint: Paint,
@@ -1348,7 +1401,193 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
             canvas.drawPath(path, paint)
         }
     }
+    fun readcircle_map(){
+        circle_map.forEach { (key, value) ->
+            val key = key
+            val value = value
+            val temp_ListE = ArrayList<String>()
+            val temp_ListN = ArrayList<String>()
+            val temp_radius = ArrayList<String>()
+            val temp_Latitude = ArrayList<Double>()
+            val temp_Longitude = ArrayList<Double>()
+            val temp_circlePoint: MutableList<GeoPoint> = mutableListOf()
+            val temp_hashmap = HashMap<ArrayList<String>,MutableList<GeoPoint>>()
 
+            for (k in value.indices) {
+                temp_ListE.add(value[0])
+                temp_ListN.add(value[1])
+                temp_radius.add(value[3])
+            }
+            for (i in temp_ListE.indices) {
+                val converted = convertToLatLng(temp_ListE[i].toDouble(), temp_ListN[i].toDouble(), 43, false)
+                temp_Latitude.add(converted.latitude)   // easting
+                temp_Longitude.add(converted.longitude) // northing
+            }
+            for(j in temp_Latitude.indices) {
+                temp_circlePoint.add(GeoPoint(temp_Latitude[j], temp_Longitude[j]))
+            }
+            temp_hashmap.put(temp_radius,temp_circlePoint)
+            Newcircle_map.put(key, temp_hashmap)
+/*            val paint = Paint()
+            paint.color = Color.RED
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 4f
+            for(l in temp_circlePoint.indices) {
+                map.overlays.add(drawcircle(temp_circlePoint,paint,temp_radius))
+                map.controller.setCenter(temp_circlePoint[l])
+            }*/
+        }
+        Newcircle_map.forEach{(key, value) ->
+            val key = key
+            val value = value
+            val paint = Paint()
+            paint.color = Color.RED
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 4f
+            value.forEach { (key, value)->
+                val temp_key =key
+                val temp_value = value
+                for(l in temp_value.indices) {
+                    map.overlays.add(drawcircle(temp_value,paint,temp_key))
+                    map.controller.setCenter(value[l])
+                }
+            }
+        }
+        Log.d(TAG, "readcircle_map: "+Newcircle_map)
+    }
+    class drawcircle(
+        private val points: List<GeoPoint>,
+        private var paint: Paint,
+        private var radius: List<String>,
+    ) :
+        Overlay() {
+        override fun draw(canvas: Canvas, mapView: MapView, shadow: Boolean) {
+            for (i in 0 until points.size) {
+                val geoPoint = points[i]
+                val point = mapView.projection.toPixels(geoPoint, null)
+                val x = point.x.toFloat()
+                val y = point.y.toFloat()
+                val newradius = mapView.getProjection().metersToPixels(radius[i].toFloat())
+                canvas.drawCircle(x, y,newradius,paint)
+            }
+
+
+
+        }
+    }
+    fun readpolygon_map(){
+        polygon_map.forEach { (key, value) ->
+            val key = key
+            val value = value
+            val paint = Paint()
+            paint.color = Color.GREEN
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 40f
+
+            val temp_ListN = ArrayList<String>()
+            val temp_ListE = ArrayList<String>()
+            val temp_Latitude = ArrayList<Double>()
+            val temp_Longitude = ArrayList<Double>()
+            var temp_polygonPoint: MutableList<GeoPoint> = mutableListOf()
+            for (i in value.indices) {
+                for (j in value[i].indices) {
+                    temp_ListE.add(value[i][0])
+                    temp_ListN.add(value[i][1])
+                }
+            }
+            for (i in temp_ListE.indices) {
+                val converted = convertToLatLng(temp_ListE[i].toDouble(), temp_ListN[i].toDouble(), 43, false)
+                temp_Latitude.add(converted.latitude)   // easting
+                temp_Longitude.add(converted.longitude) // northing
+            }
+            for(j in temp_Latitude.indices) {
+                temp_polygonPoint.add(GeoPoint(temp_Latitude[j], temp_Longitude[j]))
+            }
+
+            Newpolygon_map.put(key,temp_polygonPoint)
+/*            Log.d(TAG, "readpolygon_map: "+temp_polygonPoint)
+
+            for(l in temp_polygonPoint.indices) {
+                map.overlays.add(drawlwpolyline(temp_polygonPoint,paint))
+                map.controller.setCenter(temp_polygonPoint[l])
+            }*/
+        }
+        Newpolygon_map.forEach{(key, value) ->
+            val key = key
+            val value = value
+            val paint = Paint()
+            paint.color = Color.GREEN
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 4f
+            for(l in value.indices) {
+                map.overlays.add(drawlwpolyline(value,paint))
+                map.controller.setCenter(value[l])
+            }
+        }
+    }
+    fun readline_map(){
+        line_map.forEach{(key, value) ->
+            val key = key
+            val value = value
+//            Log.d(TAG, "readline_map: "+"key: $key\n"+"value: $value")
+            val temp_ListN = ArrayList<String>()
+            val temp_ListE = ArrayList<String>()
+            val temp_Latitude = ArrayList<Double>()
+            val temp_Longitude = ArrayList<Double>()
+            var temp_linePoint: MutableList<GeoPoint> = mutableListOf()
+            val paint = Paint()
+            paint.color = Color.BLUE
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 4f
+            for (i in value) {
+                temp_ListE.add(value[0])
+                temp_ListE.add(value[3])
+                temp_ListN.add(value[1])
+                temp_ListN.add(value[4])
+            }
+            Log.d(TAG, "readline_map: "+temp_ListN+" values: "+temp_ListE)
+/*            for (i in temp_ListE.indices) {
+                val converted = convertToLatLng(temp_ListE[i].toDouble(), temp_ListN[i].toDouble(), 43, false)
+                temp_Latitude.add(converted.latitude)   // easting
+                temp_Longitude.add(converted.longitude) // northing
+            }
+            for(j in temp_Latitude.indices) {
+                temp_linePoint.add(GeoPoint(temp_Latitude[j], temp_Longitude[j]))
+            }
+            Newline_map.put(key,temp_linePoint)
+            Log.d(TAG, "readline_map: "+temp_linePoint)
+            for(l in temp_linePoint.indices) {
+                map.overlays.add(drawlwpolyline(temp_linePoint,paint))
+                map.controller.setCenter(temp_linePoint[l])
+            }*/
+        }
+        Log.d(TAG, "Newline_map: "+Newline_map)
+
+/*        Newline_map.forEach{(key, value) ->
+            val key = key
+            val value = value
+            val paint = Paint()
+            paint.color = Color.BLUE
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = 4f
+            for(l in value.indices) {
+                map.overlays.add(drawdxflines(value,paint))
+                map.controller.setCenter(value[l])
+            }
+        }*/
+    }
+    class drawdxflines(
+        private val points: List<GeoPoint>,
+        private var paint: Paint,
+    ) :
+        Overlay() {
+        override fun draw(canvas: Canvas, mapView: MapView, shadow: Boolean) {
+            val startPoint = mapView.projection.toPixels(points[0], null)
+            val endPoint = mapView.projection.toPixels(points[1], null)
+            /*this code is also working*/
+            canvas.drawLine(startPoint.x.toFloat(), startPoint.y.toFloat(), endPoint.x.toFloat(), endPoint.y.toFloat(), paint)
+        }
+    }
     fun isInternetAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
@@ -1356,5 +1595,36 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver{
 
         return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
+    /*Read a Kml File*/
+    private fun plotKmlFeatures(kmlDocument: KmlDocument) {
+        val kmlOverlay = kmlDocument.mKmlRoot.buildOverlay(map, null, null, kmlDocument)
+        map.getOverlays().add(kmlOverlay)
+        map.invalidate()
+    }
 
+    /**/
+    private fun loadGeoJsonFile(fileName: String): String? {
+        try {
+            val assetManager: AssetManager = applicationContext.assets
+            val inputStream = assetManager.open(fileName)
+            val reader = BufferedReader(InputStreamReader(inputStream))
+            val jsonString = reader.use { it.readText() }
+            return jsonString
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    /*29-06-2023*/
+
+    private fun drawPolygonOnMap() {
+        val polygonOverlay = Polygon()
+        polygonOverlay.points = currentPolygonPoints
+        map.overlays.add(polygonOverlay)
+        map.invalidate()
+
+        // Clear the current polygon points for future drawings
+        currentPolygonPoints.clear()
+    }
 }
