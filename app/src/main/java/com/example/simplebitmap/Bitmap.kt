@@ -363,11 +363,18 @@ class Bitmap : AppCompatActivity() {
                 facepoint_inpixel.add(temp_data)
                 facepoint_inCoordinate.add(temp_data1)
             }
+            Log.d(TAG, "facepoint_inCoordinate:size1"+facepoint_inCoordinate.size)
+
         }
+
         find()
     }
     fun find() {
+        println("_inCoordinate:size --->" + facepoint_inCoordinate.size)
+        Log.d(TAG, "facepoint_inCoordinate:size2"+facepoint_inCoordinate.size)
+        val time1 = System.currentTimeMillis()
         for (i in facepoint_inCoordinate.indices) {
+            Log.d(TAG, "facepoint_inCoordinate: "+facepoint_inCoordinate)
             val temp_ListX = ArrayList<Double>()
             val temp_ListY = ArrayList<Double>()
             val temp_newList = facepoint_inCoordinate[i]
@@ -472,7 +479,10 @@ class Bitmap : AppCompatActivity() {
         val d = -a * x1 - b * y1 - c * z1
         println("equation of plane is " + a + " x + " + b + " y + " + c + " z + " + d + " = 0");
         val new_height = -(a * x + b * y + d) / c
-        println("New Height is " + new_height );
+        println("New Height is " + new_height )
+        val time2 = System.currentTimeMillis()
+        Log.d(TAG, "total_time_in_STEP1...: " + (time2 - time1))
+
     }
 /////////////////////////ON draw///////////////////////////////////////
     fun draw() {
@@ -507,6 +517,7 @@ class Bitmap : AppCompatActivity() {
     fun drawpixelpoint() {
         bitmap = Bitmap.createBitmap(currentdisplay!!.width, currentdisplay!!.height, Bitmap.Config.ARGB_8888)
         canvas = Canvas(bitmap!!)
+        Log.d(TAG, "drawpixelpoint: "+facepoint_inpixel)
         for (i in facepoint_inpixel.indices) {
             val temp_ListX = ArrayList<Double>()
             val temp_ListY = ArrayList<Double>()
@@ -518,8 +529,8 @@ class Bitmap : AppCompatActivity() {
                     temp_ListY.add(temp_newList[k])
                 }
             }
-//            Log.d(MotionEffect.TAG, "temp_ListXDraw: $temp_ListX")
-//            Log.d(MotionEffect.TAG, "temp_ListYDraw: $temp_ListY")
+            Log.d(TAG, "temp_ListXDraw: $temp_ListX")
+            Log.d(TAG, "temp_ListYDraw: $temp_ListY")
             var isFirstPoint = true
             var firstpos = -1
             var lastpos = -1
@@ -774,9 +785,9 @@ class Bitmap : AppCompatActivity() {
             }
         }
         readfacepoint()
-/*        println("Northing in NewImport"+Northing.size)
-        println("Easting in NewImport"+Easting.size)
-        println("Elevation in NewImport"+Elevation.size)*/
+        println("Northing in NewImport"+Northing)
+        println("Easting in NewImport"+Easting)
+        println("Elevation in NewImport"+Elevation)
     }
     /// In this part we read the facepoint from the .xml file
     fun readfacepoint(){

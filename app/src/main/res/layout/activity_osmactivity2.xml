@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".OSMActivity2">
 
-<!--    <com.example.simplebitmap.CustomMapView
-        android:id="@+id/mapview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
     <org.osmdroid.views.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
@@ -33,7 +29,6 @@
             android:visibility="gone"
             android:text="SP" />
 
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/resetZoomButton"
             android:layout_width="50dp"
@@ -49,9 +44,8 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:visibility="gone"
-            android:hint="D"
+            android:hint="RD"
             android:textColorHint="@color/black"/>
-
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/rectangle"

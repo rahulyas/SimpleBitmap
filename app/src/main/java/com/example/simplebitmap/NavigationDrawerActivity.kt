@@ -91,6 +91,16 @@ class NavigationDrawerActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
+                R.id.landxml -> {
+                    val intent = Intent(this,pointtoland::class.java)
+                    startActivity(intent)
+                }
+
+                R.id.landxml2 -> {
+                    val intent = Intent(this,PointsTolandXml::class.java)
+                    startActivity(intent)
+                }
+
                 R.id.themecolor -> {
                     if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

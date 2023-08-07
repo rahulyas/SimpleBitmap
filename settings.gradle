@@ -17,3 +17,4 @@ rootProject.name = "SimpleBitmap"
 include ':app'
 include ':customgui'
 include ':touchview'
+include ':CalFileLibrary'

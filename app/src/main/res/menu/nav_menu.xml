@@ -55,6 +55,18 @@
         android:icon="@drawable/ic_baseline_map_24"
         />
 
+    <item
+        android:id="@+id/landxml"
+        android:title="Point to LandXml"
+        android:icon="@drawable/ic_baseline_map_24"
+        />
+
+    <item
+        android:id="@+id/landxml2"
+        android:title="Point to LandXml2"
+        android:icon="@drawable/ic_baseline_map_24"
+        />
+
 
     <item
         android:id="@+id/themecolor"
