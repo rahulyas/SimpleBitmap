@@ -110,6 +110,15 @@ class Utils {
                 new_finallist2.add(Easting)
                 new_finallist2.add(Elevation)
                 Log.d(ContentValues.TAG, "readsplitdata:=="+"identifier = "+identifier+"Northing = "+Northing+"Easting = "+Easting+"Elevation = "+Elevation)
+            }else if(values.isNotEmpty() && values.contains("vn")){
+                val identifier = values[0]
+                val Northing = values[1].toDouble()
+                val Easting = values[2].toDouble()
+                val Elevation = values[3].toDouble()
+                new_finallist2.add(Northing)
+                new_finallist2.add(Easting)
+                new_finallist2.add(Elevation)
+                Log.d(ContentValues.TAG, "readsplitdata:=="+"identifier = "+identifier+"Northing = "+Northing+"Easting = "+Easting+"Elevation = "+Elevation)
             }
         }
         return new_finallist2;
