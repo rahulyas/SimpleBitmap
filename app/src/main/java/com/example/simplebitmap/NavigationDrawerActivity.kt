@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.simplebitmap.TiltedAnimation.TiltedActivity
+import com.example.simplebitmap.myView.firstActivity3D
 import com.google.android.material.navigation.NavigationView
 
 class NavigationDrawerActivity : AppCompatActivity() {
@@ -98,6 +99,10 @@ class NavigationDrawerActivity : AppCompatActivity() {
 
                 R.id.landxml2 -> {
                     val intent = Intent(this,PointsTolandXml::class.java)
+                    startActivity(intent)
+                }
+                R.id.model3d -> {
+                    val intent = Intent(this, firstActivity3D::class.java)
                     startActivity(intent)
                 }
 

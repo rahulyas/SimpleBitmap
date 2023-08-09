@@ -31,6 +31,12 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".myView.Activity3D"
+            android:exported="false" />
+        <activity
+            android:name=".myView.firstActivity3D"
+            android:exported="false" />
+        <activity
             android:name=".RasterImageActivity"
             android:exported="false">
             <meta-data

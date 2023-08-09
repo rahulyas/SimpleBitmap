@@ -1072,7 +1072,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
         }
         val time6 = System.currentTimeMillis()
         Log.d(TAG, "total_time_in_STEP3...: " + (time6 - time5))
-      /*  val gson = Gson()
+        val gson = Gson()
         val json1: String = gson.toJson(XmltrianglePoint_map)
         val editor = sharedpreferences.edit()
         editor.putString(Constants.XmltrianglePoint_map, json1)
@@ -1088,7 +1088,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
                 map.overlays.add(drawlines(value, paint))
                 map.controller.setCenter(value[l])
             }
-        }*/
+        }
         val time7 = System.currentTimeMillis()
         Log.d(TAG, "total_time_in_STEP4...: " + (time7 - time5))
     }

@@ -367,9 +367,9 @@ class Bitmap : AppCompatActivity() {
 
         }
 
-        find()
+        findHeight()
     }
-    fun find() {
+    fun findHeight() {
         println("_inCoordinate:size --->" + facepoint_inCoordinate.size)
         Log.d(TAG, "facepoint_inCoordinate:size2"+facepoint_inCoordinate.size)
         val time1 = System.currentTimeMillis()

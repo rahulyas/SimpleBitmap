@@ -67,6 +67,12 @@
         android:icon="@drawable/ic_baseline_map_24"
         />
 
+    <item
+        android:id="@+id/model3d"
+        android:title="3D Viewer"
+        android:icon="@drawable/ic_baseline_map_24"
+        />
+
 
     <item
         android:id="@+id/themecolor"

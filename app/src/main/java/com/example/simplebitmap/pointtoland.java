@@ -345,7 +345,7 @@ public class pointtoland extends AppCompatActivity {
                 this.p2 = p1;
             }else {
                 try {
-                    System.out.println("Napaka pri tockah: " + p1 + p2);
+                    System.out.println("Dots error:= " + p1 + p2);
                     throw new Exception();
                 } catch (Exception e) {
                     e.printStackTrace();
