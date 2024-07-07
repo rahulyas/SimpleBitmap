@@ -392,7 +392,9 @@ public class OSMActivity extends AppCompatActivity {
 
     private void drawTriangle() {
         Polygon polygon = new Polygon(map);
-//        polygon.getFillPaint().setColor(Color.argb(100, 255, 0, 0)); // Set fill color
+//        polygon.getF41
+//        \][opit5e432.
+//        illPaint().setColor(Color.argb(100, 255, 0, 0)); // Set fill color
         polygon.setFillColor(Color.argb(100, 255, 0, 0));
         polygon.setStrokeColor(Color.RED);
         polygon.setStrokeWidth(1.0f);

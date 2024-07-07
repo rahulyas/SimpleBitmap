@@ -35,6 +35,7 @@ import org.osmdroid.bonuspack.kml.KmlDocument
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
@@ -63,7 +64,7 @@ import java.util.Scanner
 import kotlin.math.pow
 
 
-class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
+class OSMActivity2 : AppCompatActivity(), MapEventsReceiver {
     private lateinit var binding: ActivityOsmactivity2Binding
     private lateinit var map: MapView
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
@@ -80,7 +81,8 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
     private val MINOR_RADIUS = 6356752.314
 
     var geoPoints: MutableList<IGeoPoint> = mutableListOf()
-//    var geoPoints: MutableList<GeoPoint> = mutableListOf()
+
+    //    var geoPoints: MutableList<GeoPoint> = mutableListOf()
     var rectanglePoints: MutableList<GeoPoint> = mutableListOf()
     var trianglePoints: MutableList<GeoPoint> = mutableListOf()
     var linePoints: MutableList<GeoPoint> = mutableListOf()
@@ -146,11 +148,12 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
             // Internet connectivity is available
             //this for load the osmdroid map
             val ctx = this.applicationContext
-            Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
+            Configuration.getInstance()
+                .load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
             Configuration.getInstance().cacheMapTileCount = 100 // Set the desired cache size
-            Configuration.getInstance().cacheMapTileOvershoot = 30 // Set the desired cache overshoot
-        }
-        else {
+            Configuration.getInstance().cacheMapTileOvershoot =
+                30 // Set the desired cache overshoot
+        } else {
             // No internet connection, show an AlertDialog or take appropriate action
             map.setUseDataConnection(false) // Disable data connection for the map
             map.overlays.clear() // Clear any existing overlays
@@ -160,36 +163,35 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
                     super.draw(canvas, mapView, shadow)
                     if (!shadow) {
                         canvas?.drawColor(Color.WHITE)
-/*
-                        val gridSize = 50 // Set the size of each grid cell
-                        val width = canvas!!.width
-                        val height = canvas!!.height
+                        /*
+                                                val gridSize = 50 // Set the size of each grid cell
+                                                val width = canvas!!.width
+                                                val height = canvas!!.height
 
-                        val paint = Paint()
-                        // Set grid line color and width
-                        paint.color = Color.BLACK
-                        paint.strokeWidth = 2f
+                                                val paint = Paint()
+                                                // Set grid line color and width
+                                                paint.color = Color.BLACK
+                                                paint.strokeWidth = 2f
 
-                        // Draw vertical grid lines
-                        var x = gridSize
-                        while (x < width) {
-                            canvas!!.drawLine(x.toFloat(), 0f, x.toFloat(), height.toFloat(), paint)
-                            x += gridSize
-                        }
+                                                // Draw vertical grid lines
+                                                var x = gridSize
+                                                while (x < width) {
+                                                    canvas!!.drawLine(x.toFloat(), 0f, x.toFloat(), height.toFloat(), paint)
+                                                    x += gridSize
+                                                }
 
-                        // Draw horizontal grid lines
-                        var y = gridSize
-                        while (y < height) {
-                            canvas!!.drawLine(0f, y.toFloat(), width.toFloat(), y.toFloat(), paint)
-                            y += gridSize
-                        }*/
+                                                // Draw horizontal grid lines
+                                                var y = gridSize
+                                                while (y < height) {
+                                                    canvas!!.drawLine(0f, y.toFloat(), width.toFloat(), y.toFloat(), paint)
+                                                    y += gridSize
+                                                }*/
                     }
                 }
             }
             map.overlays.add(backgroundOverlay)
         }
 
-        
 
         //Scalebar
         val metrics = resources.displayMetrics
@@ -245,25 +247,26 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
         binding.redraw.setOnClickListener {
             val gson = Gson()
 //            val json1: String = sharedpreferences.getString(Constants.Newlwpolyline_map, "").toString()
-            val json1: String = sharedpreferences.getString(Constants.XmltrianglePoint_map, "").toString()
+            val json1: String =
+                sharedpreferences.getString(Constants.XmltrianglePoint_map, "").toString()
             val type = object : TypeToken<HashMap<String, MutableList<GeoPoint>>>() {}.getType()
             val mySet1: HashMap<String, MutableList<GeoPoint>> = gson.fromJson(json1, type)
 //            Newlwpolyline_map = mySet1
             XmltrianglePoint_map = mySet1
-/*
-            Newlwpolyline_map.forEach { (key, value) ->
-                val key = key
-                val value = value
-                val paint = Paint()
-                paint.color = Color.GREEN
-                paint.style = Paint.Style.STROKE
-                paint.strokeWidth = 4f
-                for (l in value.indices) {
-                    map.overlays.add(drawlwpolyline(value, paint))
-                    map.controller.setCenter(value[l])
-                }
-            }
-*/
+            /*
+                        Newlwpolyline_map.forEach { (key, value) ->
+                            val key = key
+                            val value = value
+                            val paint = Paint()
+                            paint.color = Color.GREEN
+                            paint.style = Paint.Style.STROKE
+                            paint.strokeWidth = 4f
+                            for (l in value.indices) {
+                                map.overlays.add(drawlwpolyline(value, paint))
+                                map.controller.setCenter(value[l])
+                            }
+                        }
+            */
             XmltrianglePoint_map.forEach { (key, value) ->
                 val key = key
                 val value = value
@@ -279,7 +282,7 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
         }
 ////////////////////////////////////////////////////////////////////
         // Set the center of the map or current location
-        val startPoint = GeoPoint(28.619558, 77.380608,55.0068) // Start point coordinates
+        val startPoint = GeoPoint(28.619558, 77.380608, 55.0068) // Start point coordinates
         map.controller.setCenter(startPoint)
         val marker = Marker(map)
         marker.position = startPoint
@@ -1043,17 +1046,17 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
             var i = 0
             while (i in temp_newList.indices) {
                 temp_ListN.add(temp_newList.get(i))
-                temp_ListE.add(temp_newList.get(i+1))
-                Log.d(TAG, "tempPoints:"+temp_newList.get(i)+"== "+temp_newList.get(i+1))
+                temp_ListE.add(temp_newList.get(i + 1))
+                Log.d(TAG, "tempPoints:" + temp_newList.get(i) + "== " + temp_newList.get(i + 1))
                 i = i + 2
             }
-/*            for (k in temp_newList.indices) {
-                if (k % 2 == 0) {
-                    temp_ListN.add(temp_newList[k])
-                } else {
-                    temp_ListE.add(temp_newList[k])
-                }
-            }*/
+            /*            for (k in temp_newList.indices) {
+                            if (k % 2 == 0) {
+                                temp_ListN.add(temp_newList[k])
+                            } else {
+                                temp_ListE.add(temp_newList[k])
+                            }
+                        }*/
             Log.d(TAG, "temp_ListE: " + temp_ListE + "\n" + temp_ListN)
             for (j in temp_ListE.indices) {
                 temp_trianglePoint.add(GeoPoint(temp_ListE[j], temp_ListN[j]))
@@ -1063,8 +1066,8 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
             paint.color = Color.BLUE
             paint.style = Paint.Style.STROKE
             paint.strokeWidth = 4f
-            for(l in temp_trianglePoint.indices) {
-                map.overlays.add(drawlines(temp_trianglePoint,paint))
+            for (l in temp_trianglePoint.indices) {
+                map.overlays.add(drawlines(temp_trianglePoint, paint))
                 map.controller.setCenter(temp_trianglePoint[l])
             }
 
@@ -1434,14 +1437,14 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
             }
             start_counter++
         }
-        /*        println("point_map: " + point_map.entries)
+        println("point_map: " + point_map.entries)
         println("mtext_map: " + mtext_map.entries)
         println("circle_map: " + circle_map.entries)
         println("line_map: " + line_map.entries)
         println("arc_map: " + arc_map.entries)
         println("lwpolyline_map: " + lwpolyline_map.entries)
         println("polyline_map: " + polyline_map.entries)
-        println("polygon_map: " + polygon_map.entries)*/
+        println("polygon_map: " + polygon_map.entries)
 //        println("lwpolyline_map: " + lwpolyline_map.entries)
         readlwpolyline_map()
         readcircle_map()
@@ -1770,6 +1773,12 @@ class OSMActivity2 : AppCompatActivity() ,MapEventsReceiver {
         currentPolygonPoints.clear()
     }
 
+    /*private fun zoomToGeoPoints(geoPoints: List<IGeoPoint>) {
+        // Calculate the bounding box that includes all points
+        val boundingBox = BoundingBox.fromGeoPoints(geoPoints)
 
+        // Zoom to the bounding box
+        mapController.zoomToBoundingBox(boundingBox, true)
+    }*/
 
 }

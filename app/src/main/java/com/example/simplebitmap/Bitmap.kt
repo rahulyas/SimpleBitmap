@@ -4,8 +4,11 @@ import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.*
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Path
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,12 +17,23 @@ import android.util.Log
 import android.view.Display
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.Constraints
 import com.example.simplebitmap.databinding.ActivityBitmapBinding
 import com.ortiz.touchview.OnTouchImageViewListener
 import com.ortiz.touchview.TouchImageView
-import java.io.*
+import java.io.BufferedReader
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileReader
+import java.io.FileWriter
+import java.io.IOException
+import java.io.InputStreamReader
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Arrays
+import java.util.Collections
+import java.util.Locale
+import java.util.Scanner
 
 class Bitmap : AppCompatActivity() {
     private lateinit var binding: ActivityBitmapBinding
@@ -98,6 +112,10 @@ class Bitmap : AppCompatActivity() {
 
     var pathtext = StringBuilder()
     var spilitdatapath = ""
+
+    /*18-08-2023*/
+    var facepoint_inpixel1 = ArrayList<Double>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBitmapBinding.inflate(layoutInflater)
@@ -608,6 +626,7 @@ class Bitmap : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_TEXT && data != null) {
             fileuri = data.data
+            val list: List<String> = readAnyfile(fileuri!!)
 //            readText(getFilePath(fileuri!!))
 //            readCSVFile(getFilePath(fileuri!!))
             val path = getFilePath(fileuri!!)
@@ -897,4 +916,147 @@ class Bitmap : AppCompatActivity() {
             Log.e("TAG", "Error")
         }
     }
+
+/************************************************************************************************************/
+    fun readAnyfile(uri: Uri): List<String> {
+        val csvFile = contentResolver.openInputStream(uri)
+        val isr = InputStreamReader(csvFile)
+        return BufferedReader(isr).readLines()
+    }
+
+
+    fun NewSplitDataLandXml(list: List<String>) {
+        val temp_facepoint = java.util.ArrayList<Int>()
+        for (item in list) {
+            val splitData = item.split(", ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            Log.d(TAG, "readText:splitData ==" + Arrays.toString(splitData));
+            for (input in splitData) {
+                // Find the start and end indexes of <P> tag content
+                val startIdx = input.indexOf(">")
+                // int endIdx = input.lastIndexOf("<");
+                val endIdx = input.lastIndexOf("</P")
+                // Check if <P> tag content was found
+                if (startIdx != -1 && endIdx != -1 && startIdx < endIdx) {
+                    val content = input.substring(startIdx + 1, endIdx)
+                    // Split the content into an array of strings using space as the delimiter
+                    val values = content.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                    val easting = values[0].toDouble()
+                    val northing = values[1].toDouble()
+                    val elevation = values[2].toDouble()
+                    Easting.add(easting)
+                    Northing.add(northing)
+                    Elevation.add(elevation)
+/*                  firstlist.add(easting);
+                    firstlist.add(northing);
+                    firstlist.add(elevation);*/
+                    System.out.println("Easting ="+Easting +"=Northing="+ Northing +"=Elevation="+Elevation);
+                } else {
+                    println("Invalid input format: ")
+                }
+                val FaceendIdx = input.lastIndexOf("</F>")
+                if (startIdx != -1 && FaceendIdx != -1 && startIdx < FaceendIdx) {
+                    val content = input.substring(startIdx + 1, FaceendIdx)
+                    // Split the content into an array of strings using space as the delimiter
+                    val values = content.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    val P1 = values[0].toInt()
+                    val P2 = values[1].toInt()
+                    val P3 = values[2].toInt()
+                    temp_facepoint.add(P1)
+                    temp_facepoint.add(P2)
+                    temp_facepoint.add(P3)
+                    System.out.println("P1 ="+P1 +"=P2="+ P2 +"=P3="+P3);
+                } else {
+//                    System.out.println("Invalid input format: ");
+                }
+            }
+        }
+
+
+        for (k in temp_facepoint.indices) {
+            val value = temp_facepoint[k]
+            facepoint_inpixel1.add(pixelofX[value - 1])
+            facepoint_inpixel1.add(pixelofY[value - 1])
+        }
+//        Log.d(TAG, "NewSplitDataLandXml: =="+firstlist);
+//        Log.d(TAG, "NewSplitDataLandXmlfacepoint: =="+temp_facepoint);
+        Log.d(Constraints.TAG, "facepoint_inpixel1: ==" + facepoint_inpixel1)
+    }
+    fun drawpixelpoint1() {
+        bitmap = Bitmap.createBitmap(currentdisplay!!.width, currentdisplay!!.height, Bitmap.Config.ARGB_8888)
+        canvas = Canvas(bitmap!!)
+        Log.d(TAG, "drawpixelpoint: "+facepoint_inpixel)
+        for (i in facepoint_inpixel1.indices) {
+            val temp_ListX = ArrayList<Double>()
+            val temp_ListY = ArrayList<Double>()
+
+            temp_ListX.add(facepoint_inpixel1.get(0))
+            Log.d(TAG, "temp_ListXDraw: $temp_ListX")
+            Log.d(TAG, "temp_ListYDraw: $temp_ListY")
+            var isFirstPoint = true
+            var firstpos = -1
+            var lastpos = -1
+            var j = 0
+            while (j < temp_ListY.size - 1 && j < temp_ListX.size - 1) {
+                paint = Paint()
+                paint!!.strokeWidth = 3f
+                paint!!.color = Color.BLACK
+                val textPaint = Paint()
+                textPaint.strokeWidth = 10f
+                textPaint.color = Color.BLACK
+                if (isFirstPoint) {
+                    isFirstPoint = false
+                    firstpos = j
+                }
+                val newposition = j + 1
+                lastpos = j + 1
+                canvas!!.drawText(i.toString() + "", temp_ListX[j].toFloat() - 10, temp_ListY[j].toFloat() - 10, textPaint)
+
+                canvas!!.drawLine(temp_ListX[j].toFloat(), temp_ListY[j].toFloat(), temp_ListX[newposition].toFloat(), temp_ListY[newposition].toFloat(), paint!!)
+
+                val pixelModel = getlinePixels(temp_ListX[j].toInt(),temp_ListY[j].toInt(), temp_ListX[newposition].toInt(),temp_ListY[newposition].toInt())
+                linePixel[i] = pixelModel
+                imageView!!.setImageBitmap(bitmap)
+                j++
+            }
+            if (firstpos != -1 && lastpos != -1) {
+                paint = Paint()
+                paint!!.strokeWidth = 3f
+                paint!!.color = Color.BLACK
+                canvas!!.drawLine(temp_ListX[lastpos].toFloat(), temp_ListY[lastpos].toFloat(), temp_ListX[firstpos].toFloat(), temp_ListY[firstpos].toFloat(), paint!!)
+                val pixelModel = getlinePixels(temp_ListX[lastpos].toInt(),temp_ListY[lastpos].toInt(), temp_ListX[firstpos].toInt(), temp_ListY[firstpos].toInt())
+                linePixel[i] = pixelModel
+            }
+            ////////////////////////// Second method //////////////////////////
+            paint = Paint()
+            paint!!.color = Color.YELLOW
+            paint!!.style = Paint.Style.FILL
+            val path1 = Path()
+            path1.moveTo(temp_ListX.get(0).toFloat(), temp_ListY.get(0).toFloat())
+            path1.lineTo(temp_ListX.get(1).toFloat(), temp_ListY.get(1).toFloat())
+            path1.lineTo(temp_ListX.get(2).toFloat(), temp_ListY.get(2).toFloat())
+            path1.lineTo(temp_ListX.get(0).toFloat(), temp_ListY.get(0).toFloat())
+            canvas!!.drawPath(path1, paint!!)
+            val paint1 = Paint()
+            paint1.color = Color.BLUE
+            paint1.textSize = 15f
+            canvas!!.drawTextOnPath(i.toString() + "", path1, 25f, 25f, paint1)
+        }
+        var j = 0
+        while (j < pixelofX.size && j < pixelofY.size) {
+            paint = Paint()
+            paint!!.color = Color.BLUE
+            paint!!.strokeWidth = 5f
+            canvas!!.drawCircle(
+                pixelofX[pixelofX.size - 1].toFloat(),
+                pixelofY[pixelofY.size - 1].toFloat(),
+                5f,
+                paint!!
+            )
+            imageView!!.setImageBitmap(bitmap)
+            j++
+        }
+//        println("linePixel: " + linePixel.entries)
+    }
+
 }
